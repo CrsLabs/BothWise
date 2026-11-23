@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Solo cartelle temporanee private (mai tutta la memoria): i file condivisi e l'aggiornamento scaricato e già controllato, da passare all'installazione di Android. -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path name="condivisi" path="condivisi/" />
+    <cache-path name="aggiornamenti" path="aggiornamenti/" />
+</paths>
