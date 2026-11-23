@@ -6,7 +6,7 @@
 <p align="center"><b>Le tue cartelle, uguali ovunque.</b><br>
 Senza cloud, senza account, senza server.</p>
 
-<p align="center">Android 10+ · v0.9.1 · Italiano e English · Gratis e open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v0.9.2 · Italiano e English · Gratis e open source (GPL-3.0)</p>
 
 ---
 

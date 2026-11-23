@@ -993,7 +993,7 @@ html[data-tema="chiaro"] .su-scuro .text-teal-300,html[data-tema="chiaro"] .su-s
 html[data-tema="chiaro"] .su-scuro .text-teal-400,html[data-tema="chiaro"] .su-scuro.text-teal-400{color:#2dd4bf}
 html[data-tema="chiaro"] { color-scheme: light; }
 html[data-tema="scuro"] { color-scheme: dark; }
-html[data-tema="chiaro"] body.bg-slate-900 { background-color: #eef2f6; }
+html[data-tema="chiaro"] body.bg-slate-900 { background-color: #f8fafc; }
 html[data-tema="chiaro"] .navBtn { color: #64748b; }
 html[data-tema="chiaro"] .navBtn.attivo { color: #b45309; }
 html[data-tema="chiaro"] .navBtn[data-nav="photoSurvey"].attivo, html[data-tema="chiaro"] .navBtn[data-nav="agendaTool"].attivo { color: #0369a1; }

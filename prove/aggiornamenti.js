@@ -13,6 +13,7 @@ function nuovoNat(nuova) {
     if (pl === 'BothWise') {
       if (m === 'controllaAggiornamento') return { v: nuova ? { installata: 34, nuova: true, versione: '0.9.1', novita: 'Correzioni.', dimensione: 9437184 } : { installata: 34, nuova: false } };
       if (m === 'scaricaAggiornamento') return { v: { permesso: true, avviata: true } };
+      if (m === 'frequenze') return { v: { massima: 120, minima: 60, attuale: 120 } };
       return { v: m === 'puoSbloccare' ? { ok: true, impronta: true } : {} };
     }
     if (m === 'avvia' || m === 'stato') return { v: { avviato: true, nome: 'Telefono', id: 'M1', permessoRete: 'ok', dispositivi: [] } };
@@ -73,6 +74,18 @@ const finestraTesto = p => p.evaluate(() => { const f = document.getElementById(
   { const { p, ctx, chiamate } = await apri(b, {}, false);
     await p.waitForTimeout(8500);
     t('senza versioni nuove non disturba', !(await finestraTesto(p)) && chiamate.includes('BothWise.controllaAggiornamento')); await ctx.close(); }
+
+  console.log('▶ Fluidità dello schermo (come DoctorCar)');
+  { const { p, ctx, err, chiamate } = await apri(b, { bothwise_aggiornamenti: recente }, false);
+    t('all\'avvio applica la fluidità scelta (di serie: massima)', chiamate.includes('BothWise.impostaFrequenza'));
+    await p.click('#impBtn'); await p.waitForTimeout(500); await p.click('[data-arg="aspetto"]'); await p.waitForTimeout(500);
+    t('in Aspetto c\'è «Fluidità dello schermo» con «Massima (120 Hz)» scelta', await p.evaluate(() => !!document.getElementById('boxHz').offsetParent && document.querySelector('#impHz [data-hz="massima"]').textContent === 'Massima (120 Hz)' && document.querySelector('#impHz [data-hz="massima"]').getAttribute('aria-checked') === 'true'));
+    const prima = chiamate.length; await p.click('#impHz [data-hz="60"]'); await p.waitForTimeout(300);
+    t('«60 Hz» si salva e si applica subito', await p.evaluate(() => localStorage.getItem('bothwise_frequenza') === '"60"' && document.querySelector('#impHz [data-hz="60"]').getAttribute('aria-checked') === 'true') && chiamate.slice(prima).includes('BothWise.impostaFrequenza'));
+    t('nessun errore', !err.length, err.join(' | ')); await ctx.close(); }
+  { const { p, ctx } = await apri(b, {}, false, true);
+    await p.click('#impBtn'); await p.waitForTimeout(500); await p.click('[data-arg="aspetto"]'); await p.waitForTimeout(400);
+    t('senza l\'app Android la fluidità non c\'è', await p.evaluate(() => document.getElementById('boxHz').classList.contains('hidden'))); await ctx.close(); }
 
   console.log('▶ In inglese');
   { const { p, ctx, err } = await apri(b, { bothwise_lingua: '"en"', bothwise_aggiornamenti: recente }, true);

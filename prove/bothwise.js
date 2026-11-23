@@ -725,7 +725,7 @@ async function nat(d, pl, m, o) {
   await passo('Impostazioni, animazioni e vibrazione come DoctorWood', async () => {
     await tocca(B, '#impBtn');
     const ordine = await B.evaluate(() => [...document.querySelectorAll('#catImpostazioni .cat-imp')].map(e => e.dataset.cat).join(','));
-    esito('stesso schema: Aspetto e Vibrazione in alto, Sicurezza e dati in fondo', ordine.startsWith('aspetto,vibrazione,') && ordine.endsWith(',dati'), ordine);
+    esito('stesso schema di DoctorCar: Aspetto e Vibrazione in alto, poi Sicurezza e dati e in fondo Aggiornamenti', ordine.startsWith('aspetto,vibrazione,') && ordine.endsWith(',dati,aggiornamenti'), ordine);
     esito('tutte chiuse all\'apertura', await B.locator('#catImpostazioni .cat-testa[aria-expanded="true"]').count() === 0);
     esito('in fondo: Segnala, Informazioni e licenze, Fatto', await B.locator('[data-az="apriSegnalazione"]').count() === 1 && await B.locator('[data-az="apriInfo"]').count() === 1 && /Fatto/.test(await B.locator('#modalImpostazioni').textContent()));
     await sezione(B, 'aspetto');

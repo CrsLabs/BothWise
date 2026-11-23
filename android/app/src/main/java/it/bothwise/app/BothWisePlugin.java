@@ -287,4 +287,65 @@ public class BothWisePlugin extends Plugin {
         String m = e.getMessage();
         return m == null || m.isEmpty() || m.length() > 160 || e instanceof java.net.UnknownHostException || e instanceof java.net.SocketTimeoutException ? predefinito : m;
     }
+
+    // ===================== FLUIDITÀ DELLO SCHERMO (come DoctorCar) =====================
+    private android.view.Display schermo() {
+        android.app.Activity a = getActivity();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) return a.getDisplay();
+        //noinspection deprecation
+        return a.getWindowManager().getDefaultDisplay();
+    }
+
+    /** frequenze() -> { massima, minima, attuale } in Hz, per i modi con la stessa risoluzione */
+    @PluginMethod
+    public void frequenze(PluginCall call) {
+        getActivity().runOnUiThread(() -> {
+            try {
+                android.view.Display d = schermo();
+                android.view.Display.Mode ora = d.getMode();
+                float max = ora.getRefreshRate(), min = ora.getRefreshRate();
+                for (android.view.Display.Mode m : d.getSupportedModes()) {
+                    if (m.getPhysicalWidth() != ora.getPhysicalWidth() || m.getPhysicalHeight() != ora.getPhysicalHeight()) continue;
+                    max = Math.max(max, m.getRefreshRate());
+                    min = Math.min(min, m.getRefreshRate());
+                }
+                com.getcapacitor.JSObject r = new com.getcapacitor.JSObject();
+                r.put("massima", Math.round(max));
+                r.put("minima", Math.round(min));
+                r.put("attuale", Math.round(d.getRefreshRate()));
+                call.resolve(r);
+            } catch (Exception e) {
+                call.reject("Frequenza non disponibile", "ERRORE", e);
+            }
+        });
+    }
+
+    /** impostaFrequenza({ modo: "auto" | "massima" | "60" }) -> { hz } (0 = decide Android) */
+    @PluginMethod
+    public void impostaFrequenza(PluginCall call) {
+        String modo = call.getString("modo", "auto");
+        getActivity().runOnUiThread(() -> {
+            try {
+                android.view.Window w = getActivity().getWindow();
+                android.view.WindowManager.LayoutParams lp = w.getAttributes();
+                android.view.Display d = schermo();
+                android.view.Display.Mode ora = d.getMode(), scelto = null;
+                if (!"auto".equals(modo)) {
+                    float obiettivo = "60".equals(modo) ? 60f : Float.MAX_VALUE;
+                    for (android.view.Display.Mode m : d.getSupportedModes()) {
+                        if (m.getPhysicalWidth() != ora.getPhysicalWidth() || m.getPhysicalHeight() != ora.getPhysicalHeight()) continue;
+                        if (scelto == null || Math.abs(m.getRefreshRate() - obiettivo) < Math.abs(scelto.getRefreshRate() - obiettivo)) scelto = m;
+                    }
+                }
+                lp.preferredDisplayModeId = scelto == null ? 0 : scelto.getModeId();
+                lp.preferredRefreshRate = scelto == null ? 0 : scelto.getRefreshRate();
+                w.setAttributes(lp);
+                com.getcapacitor.JSObject r = new com.getcapacitor.JSObject();
+                r.put("hz", scelto == null ? 0 : Math.round(scelto.getRefreshRate()));
+                call.resolve(r);
+            } catch (Exception e) {
+                call.reject("Frequenza non impostata", "ERRORE", e);
+            }
+        });
+    }
 }

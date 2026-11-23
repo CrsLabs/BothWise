@@ -75,18 +75,9 @@ public class MainActivity extends BridgeActivity {
     /** Messa in pausa da Android (app recenti, Home, schermo spento): al ritorno la pagina decide se chiedere l'impronta. Le finestre affiancate e la tendina delle notifiche non fermano l'app: non contano. */
     private boolean pausata = false;
     @Override
-    public void onResume() { super.onResume(); if (pausata) { pausata = false; alla("__pausaApp"); alla("__ripresaApp"); } frequenzaMassima(); }
+    public void onResume() { super.onResume(); if (pausata) { pausata = false; alla("__pausaApp"); alla("__ripresaApp"); } }
 
-    /** Lo schermo gira alla frequenza più alta che ha (90/120 Hz): le animazioni e lo scorrimento sono più fluidi. */
-    private void frequenzaMassima() {
-        try {
-            android.view.Display d = getWindowManager().getDefaultDisplay();
-            android.view.Display.Mode m = d.getMode(); float meglio = 0; int id = 0;
-            for (android.view.Display.Mode x : d.getSupportedModes())
-                if (x.getPhysicalWidth() == m.getPhysicalWidth() && x.getPhysicalHeight() == m.getPhysicalHeight() && x.getRefreshRate() > meglio) { meglio = x.getRefreshRate(); id = x.getModeId(); }
-            if (id != 0 && id != m.getModeId()) { android.view.WindowManager.LayoutParams p = getWindow().getAttributes(); p.preferredDisplayModeId = id; getWindow().setAttributes(p); }
-        } catch (Exception ignorato) { }
-    }
+    // la frequenza dello schermo la sceglie chi usa l'app (Impostazioni → Aspetto → Fluidità dello schermo): BothWisePlugin.impostaFrequenza
 
 
     /**

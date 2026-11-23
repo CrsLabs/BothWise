@@ -156,7 +156,14 @@
               <button type="button" role="radio" data-tema="chiaro" data-az="scegliTema" data-arg="chiaro" class="opz-imp"><i class="fa-solid fa-tema-chiaro"></i>Chiaro</button>
               <button type="button" role="radio" data-tema="scuro" data-az="scegliTema" data-arg="scuro" class="opz-imp"><i class="fa-solid fa-tema-scuro"></i>Scuro</button>
             </div>
+            <button type="button" id="animBtn" role="switch" aria-checked="true" data-az="cambiaAnimazioni" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Animazioni</span><span class="block text-[11px] text-slate-400">Movimenti morbidi di finestre e sezioni</span></span><span class="interruttore" aria-hidden="true"></span></button>
             <p class="text-[11px] text-slate-400">Automatico segue il telefono.</p>
+            <p class="text-sm font-semibold text-white" style="margin-top:6px">Lingua · Language</p>
+            <div id="sceltaLingua" role="radiogroup" aria-label="Lingua" class="grid grid-cols-3 gap-2">
+              <button type="button" role="radio" data-lingua="auto" data-az="scegliLingua" data-arg="auto" class="opz-imp"><i class="fa-solid fa-tema-auto"></i>Automatica</button>
+              <button type="button" role="radio" data-lingua="it" data-az="scegliLingua" data-arg="it" class="opz-imp"><span aria-hidden="true" style="font-size:14px;font-weight:800">IT</span>Italiano</button>
+              <button type="button" role="radio" data-lingua="en" data-az="scegliLingua" data-arg="en" class="opz-imp"><span aria-hidden="true" style="font-size:14px;font-weight:800">EN</span>English</button>
+            </div>
             <p class="text-sm font-semibold text-white" style="margin-top:6px">Dimensione del testo</p>
             <div id="sceltaTesto" role="radiogroup" aria-label="Dimensione del testo" class="grid grid-cols-3 gap-2">
               <button type="button" role="radio" data-testo="100" data-az="scegliTesto" data-arg="100" class="opz-imp"><span aria-hidden="true" style="font-size:14px;font-weight:800">Aa</span>Normale</button>
@@ -164,14 +171,15 @@
               <button type="button" role="radio" data-testo="130" data-az="scegliTesto" data-arg="130" class="opz-imp"><span aria-hidden="true" style="font-size:20px;font-weight:800">Aa</span>Molto grande</button>
             </div>
             <p class="text-[11px] text-slate-400">Ingrandisce le scritte di tutta l'app, solo su questo dispositivo.</p>
-            <p class="text-sm font-semibold text-white" style="margin-top:6px">Lingua</p>
-            <div id="sceltaLingua" role="radiogroup" aria-label="Lingua" class="grid grid-cols-3 gap-2">
-              <button type="button" role="radio" data-lingua="auto" data-az="scegliLingua" data-arg="auto" class="opz-imp">Automatica</button>
-              <button type="button" role="radio" data-lingua="it" data-az="scegliLingua" data-arg="it" class="opz-imp">Italiano</button>
-              <button type="button" role="radio" data-lingua="en" data-az="scegliLingua" data-arg="en" class="opz-imp">English</button>
+            <div id="boxHz" class="hidden space-y-2">
+              <p class="text-sm font-semibold text-white" style="margin-top:6px">Fluidità dello schermo</p>
+              <div id="impHz" role="radiogroup" aria-label="Fluidità dello schermo" class="grid grid-cols-3 gap-2">
+                <button type="button" role="radio" data-hz="auto" data-az="impostaFrequenza" data-arg="auto" class="opz-imp text-xs" style="min-height:48px">Automatica</button>
+                <button type="button" role="radio" data-hz="massima" data-az="impostaFrequenza" data-arg="massima" class="opz-imp text-xs" style="min-height:48px">Massima</button>
+                <button type="button" role="radio" data-hz="60" data-az="impostaFrequenza" data-arg="60" class="opz-imp text-xs" style="min-height:48px">60 Hz</button>
+              </div>
+              <p class="text-[11px] text-slate-400">Massima: più fluida, un po' più batteria.</p>
             </div>
-            <p class="text-[11px] text-slate-400">Automatica segue la lingua del telefono.</p>
-            <button type="button" id="animBtn" role="switch" aria-checked="true" data-az="cambiaAnimazioni" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-wand-magic-sparkles text-lg text-slate-300"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Animazioni</span><span class="block text-[11px] text-slate-400">Passaggi morbidi tra le schermate</span></span><span class="interruttore" aria-hidden="true"></span></button>
           </div>
         </div>
         <div class="cat-imp" data-cat="vibrazione">
@@ -271,19 +279,6 @@
             <p class="text-[11px] text-slate-400">Quando i dispositivi non sono nella stessa Wi‑Fi, si scambiano le modifiche attraverso il tuo Google Drive o il tuo Dropbox (scegli tu), come in una cassetta delle lettere chiusa a chiave: il servizio vede solo dati cifrati, senza nomi né contenuti. Usa lo stesso servizio e lo stesso account su tutti i dispositivi; dopo il collegamento, i dispositivi devono incontrarsi una volta nella stessa Wi‑Fi per scambiarsi la chiave.</p>
           </div>
         </div>
-        <div class="cat-imp hidden" data-cat="aggiornamenti" id="catAggiornamenti">
-          <button type="button" class="cat-testa" aria-expanded="false" aria-controls="corpo_aggiornamenti" data-az="apriCat" data-arg="aggiornamenti">
-            <span class="cat-icona" style="color:#38bdf8"><i class="fa-solid fa-rotate-right"></i></span>
-            <span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Aggiornamenti</span><span id="riass_aggiornamenti" class="block text-[11px] text-slate-400 truncate"></span></span>
-            <i class="fa-solid fa-chevron-right cat-freccia text-slate-400 text-xs"></i></button>
-          <div id="corpo_aggiornamenti" class="cat-corpo hidden">
-            <button type="button" id="impAggiornamenti" role="switch" aria-checked="true" data-az="alternaAggiornamenti" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-rotate-right text-lg text-sky-400"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Controlla una volta a settimana</span><span class="block text-[11px] text-slate-400">Se c'è una versione nuova te lo dico: decidi tu se installarla</span></span><span class="interruttore" aria-hidden="true"></span></button>
-            <p id="aggStato" class="text-xs text-slate-300" role="status" style="white-space:pre-line"></p>
-            <button type="button" id="aggInstalla" data-az="installaAggiornamento" class="hidden w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl px-4 py-3 text-base"><i class="fa-solid fa-download mr-1.5"></i>Aggiorna</button>
-            <button type="button" id="aggControlla" data-az="controllaAggiornamenti" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold rounded-xl px-4 py-3 text-sm">Controlla adesso</button>
-            <p class="text-[11px] text-slate-400">Le versioni nuove arrivano da GitHub (github.com/CrsLabs/BothWise). Si installano solo se sono firmate come questa app; cartelle e abbinamenti restano tutti. Il controllo legge soltanto: nessun tuo dato esce dal dispositivo.</p>
-          </div>
-        </div>
         <div class="cat-imp" data-cat="dati">
           <button type="button" class="cat-testa" aria-expanded="false" aria-controls="corpo_dati" data-az="apriCat" data-arg="dati">
             <span class="cat-icona" style="color:#f43f5e"><i class="fa-solid fa-lucchetto"></i></span>
@@ -297,6 +292,19 @@
             <button type="button" data-az="apriVersioni" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-ripristino text-lg text-amber-400"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Versioni precedenti</span><span class="block text-[11px] text-slate-400">Riporta un file com'era prima di una modifica arrivata da fuori</span></span></button>
             <p class="text-[11px] text-slate-400">I file tolti su un altro dispositivo non spariscono subito: finiscono nel cestino della cartella (la cartella nascosta «.sincronia/cestino»), da dove li ripristini per 30 giorni. Con «Chiedi prima di cancellare» restano al loro posto finché non decidi tu. I file cambiati in contemporanea su due dispositivi restano entrambi (copia «conflitto»).</p>
             <button type="button" data-az="cancellaTutto" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><i class="fa-solid fa-trash text-lg text-rose-400"></i><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Cancella tutto da questo dispositivo</span><span class="block text-[11px] text-slate-400">Abbinamenti, chiavi, impostazioni. Le tue cartelle e i file restano.</span></span></button>
+          </div>
+        </div>
+        <div class="cat-imp hidden" data-cat="aggiornamenti" id="catAggiornamenti">
+          <button type="button" class="cat-testa" aria-expanded="false" aria-controls="corpo_aggiornamenti" data-az="apriCat" data-arg="aggiornamenti">
+            <span class="cat-icona" style="color:#34d399"><i class="fa-solid fa-download"></i></span>
+            <span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Aggiornamenti</span><span id="riass_aggiornamenti" class="block text-[11px] text-slate-400 truncate">Le nuove versioni di BothWise</span></span>
+            <i class="fa-solid fa-chevron-right cat-freccia text-slate-400 text-xs"></i></button>
+          <div id="corpo_aggiornamenti" class="cat-corpo hidden">
+            <button type="button" id="impAggiornamenti" role="switch" aria-checked="true" data-az="alternaAggiornamenti" class="riga-imp w-full flex items-center gap-3 rounded-xl bg-slate-900 border border-slate-700 px-3 text-left"><span class="flex-1 min-w-0"><span class="block text-sm font-semibold text-white">Controlla una volta a settimana</span><span class="block text-[11px] text-slate-400">Se c'è una versione nuova te lo dico: decidi tu se installarla</span></span><span class="interruttore" aria-hidden="true"></span></button>
+            <p id="aggStato" class="text-xs text-slate-300" role="status" style="white-space:pre-line"></p>
+            <button type="button" id="aggInstalla" data-az="installaAggiornamento" class="hidden w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl px-4 py-3 text-base"><i class="fa-solid fa-download mr-1.5"></i>Aggiorna</button>
+            <button type="button" id="aggControlla" data-az="controllaAggiornamenti" class="w-full bg-transparent border border-slate-600 hover:bg-slate-800 text-slate-200 font-semibold rounded-xl px-4 py-3 text-sm">Controlla adesso</button>
+            <p class="text-[11px] text-slate-400">Il controllo legge da GitHub, dove è pubblicato BothWise: non parte nessun tuo dato. L'aggiornamento si installa solo se è firmato come l'app che hai, e Android chiede sempre la conferma. La prima volta Android chiede anche di permettere a BothWise di installare app.</p>
           </div>
         </div>
       </div>
@@ -689,6 +697,7 @@
   "File tolti su un altro dispositivo. Restano qui # giorni, poi si eliminano da soli. «@» li rimette al loro posto, anche sugli altri dispositivi.": "Files removed on another device. They stay here for # days, then delete themselves. «@» puts them back, on the other devices too.",
   "Fine": "Done",
   "Finiscono nella sottocartella «@» della cartella che scegli, e arrivano anche sugli altri dispositivi.": "They go to the «@» subfolder of the folder you choose, and arrive on the other devices too.",
+  "Fluidità dello schermo": "Screen smoothness",
   "Forte": "Strong",
   "Forte (×#)": "Strong (×#)",
   "Forte · solo alcune": "Strong · only some",
@@ -735,6 +744,7 @@
   "Icone Font Awesome Free": "Font Awesome Free icons",
   "Il cestino è vuoto. Qui arrivano i file tolti su un altro dispositivo: restano recuperabili per # giorni.": "The bin is empty. Files removed on another device end up here: they stay recoverable for # days.",
   "Il codice ha # caratteri (lettere e numeri): controllalo.": "The code has # characters (letters and numbers): check it.",
+  "Il controllo legge da GitHub, dove è pubblicato BothWise: non parte nessun tuo dato. L'aggiornamento si installa solo se è firmato come l'app che hai, e Android chiede sempre la conferma. La prima volta Android chiede anche di permettere a BothWise di installare app.": "The check reads from GitHub, where BothWise is published: none of your data is sent. The update installs only if it's signed like the app you have, and Android always asks for confirmation. The first time Android also asks you to allow BothWise to install apps.",
   "Il file arriva solo al dispositivo che scegli e non entra in nessuna cartella sincronizzata.": "The file goes only to the device you choose and does not enter any synced folder.",
   "Il file dentro va nel cestino di BothWise (si recupera per # giorni) e, alla sincronizzazione, anche nel cestino degli altri dispositivi.": "The file inside goes to the BothWise bin (recoverable for # days) and, when syncing, to the bin of the other devices too.",
   "Il file in attesa andrà nel cestino alla prossima sincronizzazione (recuperabili per # giorni). Le prossime cancellazioni arriveranno direttamente nel cestino.": "The waiting file will go to the bin at the next sync (recoverable for # days). Future deletions will go straight to the bin.",
@@ -780,6 +790,7 @@
   "La condivide": "It is shared by",
   "Le modifiche fatte qui arrivano sugli altri dispositivi, e quelle fatte là arrivano qui.": "Changes made here reach the other devices, and changes made there reach here.",
   "Le modifiche fatte qui arrivano sugli altri; quelle fatte là (anche le cancellazioni) non toccano questo dispositivo. Adatto, per esempio, alle foto del telefono.": "Changes made here reach the others; those made there (deletions too) do not touch this device. Suitable, for example, for the phone's photos.",
+  "Le nuove versioni di BothWise": "New versions of BothWise",
   "Le tue cartelle, uguali ovunque": "Your folders, the same everywhere",
   "Le tue cartelle, uguali ovunque · basato su PairWood · © 2026": "Your folders, the same everywhere · based on PairWood · © 2026",
   "Le versioni nuove arrivano da GitHub (github.com/CrsLabs/BothWise). Si installano solo se sono firmate come questa app; cartelle e abbinamenti restano tutti. Il controllo legge soltanto: nessun tuo dato esce dal dispositivo.": "New versions come from GitHub (github.com/CrsLabs/BothWise). They install only if they're signed like this app; folders and pairings all stay. The check only reads: none of your data leaves the device.",
@@ -789,12 +800,16 @@
   "Leggera (×#)": "Light (×#)",
   "Leggera · solo alcune": "Light · only some",
   "Lingua": "Language",
+  "Lingua · Language": "Language · Lingua",
   "Lo stesso file è stato cambiato su due dispositivi insieme: sono rimaste tutte e due le versioni. Scegli quale tenere: niente si perde, quella che non scegli resta # giorni nel cestino o tra le versioni precedenti.": "The same file was changed on two devices at the same time: both versions were kept. Choose which to keep: nothing is lost, the one you do not choose stays for # days in the bin or among the previous versions.",
   "Manca il permesso «@»": "The «@» permission is missing",
   "Manda un file a questo dispositivo": "Send a file to this device",
   "Mandati da un tuo dispositivo: salvali dove vuoi": "Sent by one of your devices: save them wherever you like",
   "Mando # file… L'altro dispositivo deve avere BothWise aperto, nella stessa Wi‑Fi.": "Sending # files… The other device must have BothWise open, on the same Wi‑Fi.",
   "Mando il file… L'altro dispositivo deve avere BothWise aperto, nella stessa Wi‑Fi.": "Sending the file… The other device must have BothWise open, on the same Wi‑Fi.",
+  "Massima": "Maximum",
+  "Massima (# Hz)": "Maximum (# Hz)",
+  "Massima: più fluida, un po' più batteria.": "Maximum: smoother, a bit more battery.",
   "Metti in pausa": "Pause",
   "Metti in pausa finché non la riprendo": "Pause until I resume",
   "Metti in pausa fino a domani mattina": "Pause until tomorrow morning",
@@ -802,6 +817,7 @@
   "Metti «@» nella barra rapida di Android": "Put «@» in the Android quick settings",
   "Molto grande": "Very large",
   "Mostra il codice": "Show the code",
+  "Movimenti morbidi di finestre e sezioni": "Smooth movement of windows and sections",
   "Nella cartella ci sono già file con questi nomi.\n\n«Tieni tutti e due»: il nuovo prende un numero (per esempio foto (2).jpg).\n«Sostituisci»: il nuovo prende il posto del vecchio, che resta 30 giorni tra le versioni precedenti.": "There are already files with these names in the folder.\n\n\"Keep both\": the new one gets a number (for example photo (2).jpg).\n\"Replace\": the new one takes the old one's place, which stays 30 days in previous versions.",
   "Nessun browser": "No browser",
   "Nessun dispositivo abbinato": "No paired device",
@@ -2550,7 +2566,7 @@
       document.querySelectorAll('#sceltaLingua [data-lingua]').forEach(x => x.setAttribute('aria-checked', x.dataset.lingua === leggi('bothwise_lingua', 'auto') || (x.dataset.lingua === 'auto' && !['it', 'en'].includes(leggi('bothwise_lingua', 'auto'))) ? 'true' : 'false'));
       document.querySelectorAll('#sceltaTesto [data-testo]').forEach(x => x.setAttribute('aria-checked', Number(x.dataset.testo) === te ? 'true' : 'false'));
       $('riass_aspetto').textContent = `${{ auto: 'Automatico', chiaro: 'Chiaro', scuro: 'Scuro' }[t] || 'Automatico'} · testo ${{ 100: 'normale', 115: 'grande', 130: 'molto grande' }[te]}${animazioniAttive() ? '' : ' · senza animazioni'}`;
-      try { disegnaAggiornamenti(); } catch (_) {}
+      try { disegnaAggiornamenti(); aggiornaFrequenza(); } catch (_) {}
     }
     async function confermaCancellazioni() {
       const c = conf(), accesa = !c.confermaCancellazioni;
@@ -2760,7 +2776,7 @@
       document.documentElement.setAttribute('data-animazioni', si ? 'si' : 'no');
       $('animBtn').setAttribute('aria-checked', si ? 'true' : 'false');
     }
-    function cambiaAnimazioni() { const eraNo = !animazioniAttive(); scrivi('bothwise_animazioni', eraNo ? 'si' : 'no'); applicaAnimazioni(); if (eraNo) { if (document.getAnimations) document.getAnimations().forEach(a => { try { if (a.effect && a.effect.getComputedTiming().iterations !== Infinity) a.cancel(); } catch (_) {} }); } riempiImpostazioni(); }
+    function cambiaAnimazioni() { const eraNo = !animazioniAttive(); scrivi('bothwise_animazioni', eraNo ? 'si' : 'no'); applicaAnimazioni(); if (eraNo) { if (document.getAnimations) document.getAnimations().forEach(a => { try { if (a.effect && a.effect.getComputedTiming().iterations !== Infinity) a.cancel(); } catch (_) {} }); } riempiImpostazioni(); try { applicaFrequenza(); } catch (_) {} }
     // uscita delle finestre: ne resta per un attimo una copia senza id e intoccabile che rimpicciolisce e svanisce
     // (la finestra vera è già chiusa, quindi la logica non cambia)
     const scorriFinestre = new WeakMap();
@@ -2887,7 +2903,7 @@
     })();
 
     // ----- Informazioni e licenze -----
-    const VERSIONE_APP = '0.9.1';   // uguale a versionName in android/app/build.gradle
+    const VERSIONE_APP = '0.9.2';   // uguale a versionName in android/app/build.gradle
     // dati dello sviluppatore: si mostrano solo le voci compilate (come in DoctorWood)
     const SVILUPPATORE = { nome: '', ditta: 'CrsLabs', email: 'crslabs.info@gmail.com', telefono: '', sito: '', indirizzo: '', partitaIva: '' };
     const TITOLARE_COPYRIGHT = 'CrsLabs';
@@ -2907,6 +2923,34 @@
       $('modalInfo').classList.remove('hidden');
     }
     const chiudiInfo = () => $('modalInfo').classList.add('hidden');
+
+    // ----- Fluidità dello schermo (60 / 90 / 120 Hz), come DoctorCar -----
+    // Automatica: decide Android. Massima: la frequenza più alta dello schermo (più fluido, un po' più di batteria).
+    // 60 Hz: risparmio. Con le animazioni spente, «Automatica» vale come 60 Hz.
+    let hzMassimi = 0;
+    const sceltaFrequenza = () => { const v = leggi('bothwise_frequenza', 'massima'); return v === 'auto' || v === '60' ? v : 'massima'; };
+    function applicaFrequenza() {
+      if (!NATIVA) return;
+      const sc = sceltaFrequenza(), modo = sc === 'auto' && !animazioniAttive() ? '60' : sc;
+      bw('impostaFrequenza', { modo }).catch(() => {});
+    }
+    function aggiornaFrequenza() {
+      if (!NATIVA || !$('boxHz')) return;
+      $('boxHz').classList.remove('hidden');
+      const sc = sceltaFrequenza();
+      document.querySelectorAll('#impHz [data-hz]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.hz === sc)));
+      const bm = document.querySelector('#impHz [data-hz="massima"]');
+      if (bm) bm.textContent = hzMassimi > 60 ? `Massima (${hzMassimi} Hz)` : 'Massima';
+    }
+    function impostaFrequenza(modo) {
+      if (modo !== 'auto' && modo !== 'massima' && modo !== '60') return;
+      scrivi('bothwise_frequenza', modo);
+      applicaFrequenza(); aggiornaFrequenza();
+    }
+    if (NATIVA) {
+      bw('frequenze').then(r => { hzMassimi = (r && r.massima) || 0; aggiornaFrequenza(); }).catch(() => {});
+      applicaFrequenza();
+    }
 
     // ----- Aggiornamenti da GitHub (solo app Android) -----
     // Una volta a settimana (si può spegnere) o con «Controlla adesso». La rete la usa solo la parte nativa
@@ -2928,7 +2972,6 @@
         : t ? 'È uscita BothWise ' + t.versione + ' (' + mbAgg(t.dimensione) + ').' + (t.novita ? '\nNovità: ' + t.novita : '')
         : o.errore ? 'Ultimo controllo ' + quandoAgg(o.ultimo) + ': ' + o.errore
         : 'Hai l\'ultima versione. Ultimo controllo: ' + quandoAgg(o.ultimo) + '.' + (o.attivo ? '' : ' Il controllo settimanale è spento.');
-      $('riass_aggiornamenti').textContent = t ? 'Nuova versione ' + t.versione + ' · tocca per installarla' : (o.attivo ? 'Ogni settimana' : 'Controllo spento') + ' · ultimo controllo ' + quandoAgg(o.ultimo);
     }
     // chiede a GitHub; «aMano»: dal tasto (dice sempre com'è andata)
     async function controllaAggiornamenti(aMano) {
@@ -3064,7 +3107,7 @@
       retiFidate: conMessaggio(retiFidate), aggiungiRete: conMessaggio(aggiungiRete), togliRete: conMessaggio(togliRete), cambiaNotifiche: conMessaggio(cambiaNotifiche),
       // come DoctorWood
       cambiaAnimazioni, cambiaVibrazione, impostaForzaVibrazione, mostraForzaVibrazione, impostaTipoVibrazione,
-      alternaAggiornamenti, controllaAggiornamenti: () => controllaAggiornamenti(true), installaAggiornamento,
+      alternaAggiornamenti, controllaAggiornamenti: () => controllaAggiornamenti(true), installaAggiornamento, impostaFrequenza,
       apriInfo, chiudiInfo, sostieni, apriSegnalazione, chiudiSegnala, tipoSegnalazione, aggiornaSegnalazione, copiaSegnalazione: conMessaggio(copiaSegnalazione), postaSegnalazione,
     };
     document.addEventListener('click', e => {

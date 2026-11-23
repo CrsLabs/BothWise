@@ -797,3 +797,13 @@ Nessuna versione pubblicata => No version published yet
 Download non riuscito: riprova più tardi. => Download failed: try again later.
 Hai già l'ultima versione => You already have the latest version
 Il file scaricato non è quello pubblicato (impronta diversa) => The downloaded file isn't the published one (different fingerprint)
+
+# ---------- aspetto, fluidità e aggiornamenti come DoctorCar ----------
+Movimenti morbidi di finestre e sezioni => Smooth movement of windows and sections
+Lingua · Language => Language · Lingua
+Fluidità dello schermo => Screen smoothness
+Massima => Maximum
+Massima (# Hz) => Maximum (# Hz)
+Massima: più fluida, un po' più batteria. => Maximum: smoother, a bit more battery.
+Le nuove versioni di BothWise => New versions of BothWise
+Il controllo legge da GitHub, dove è pubblicato BothWise: non parte nessun tuo dato. L'aggiornamento si installa solo se è firmato come l'app che hai, e Android chiede sempre la conferma. La prima volta Android chiede anche di permettere a BothWise di installare app. => The check reads from GitHub, where BothWise is published: none of your data is sent. The update installs only if it's signed like the app you have, and Android always asks for confirmation. The first time Android also asks you to allow BothWise to install apps.
