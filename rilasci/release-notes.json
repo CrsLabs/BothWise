@@ -1,4 +1,5 @@
 {
+ "v0.9.4": "Away from Wi‑Fi, the status under the device name now says «synced through Google Drive» (or Dropbox) with the time and a green dot, instead of «Nobody reachable».",
  "v0.9.3": "Away from Wi‑Fi, with the app open, changes now arrive by themselves (the Drive/Dropbox mailbox is checked every minute) and forgotten devices are removed from the others quickly; «Disconnect and delete» tells you if the folder stays in your Drive; notifications at the bottom; smoother Settings.",
  "v0.9.2": "Screen smoothness you can choose; Settings like the other CrsLabs apps (Appearance and Updates); BothWise is free software (GPL).",
  "v0.9.1": "First public version: sync from afar too, through your own Google Drive or Dropbox (encrypted), automatic updates, new user guide and tutorials."

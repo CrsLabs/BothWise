@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.bothwise.app",
- "versionCode": 38,
- "versione": "0.9.3",
- "apk": "BothWise-0.9.3.apk",
- "sha256": "a9ee5a36d13aae86d6ff40b479bc1461c11f3e854cddddfb7ba911b41fa2e0bb",
- "novita": "Fuori dalla Wi‑Fi, con l'app aperta, le modifiche arrivano da sole; notifiche in basso; Impostazioni più fluide."
+ "versionCode": 39,
+ "versione": "0.9.4",
+ "apk": "BothWise-0.9.4.apk",
+ "sha256": "6a8cb86bc76e46470d42f97cf1806a9553c07f5cbeb87045abbf8ecb43c5e006",
+ "novita": "Fuori dalla Wi‑Fi lo stato dice «sincronizzato tramite Google Drive» (o Dropbox) invece di «Nessuno raggiungibile»."
 }
