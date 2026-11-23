@@ -4,8 +4,15 @@
 // Poi: node guida/genera-guida.js   → guida/BothWise-Guida.pdf
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
-const URL = process.argv[2] || 'http://localhost:8767/index.html';
-const OUT = path.join(__dirname, 'img'); fs.mkdirSync(OUT, { recursive: true });
+const URL = process.argv.slice(2).find(a => /^https?:/.test(a)) || 'http://localhost:8767/index.html';
+const EN = process.argv.includes('en');   // «node guida/schermate.js en»: app in inglese, schermate in guida/img-en
+const OUT = path.join(__dirname, EN ? 'img-en' : 'img'); fs.mkdirSync(OUT, { recursive: true });
+// nomi d'esempio in inglese (cartelle, dispositivi, file), per le schermate della guida inglese
+const INGLESE = [['Foto cantiere', 'Site photos'], ['Documenti ufficio', 'Office documents'], ['Tablet di bottega', 'Workshop tablet'], ['Telefono di Marco', "Mark's phone"],
+  ['Telefono di Anna', "Anna's phone"], ['cantiere-rossi', 'smith-site'], ['cantiere-verdi', 'green-site'], ['preventivi', 'quotes'], ['Preventivi', 'Quotes'], ['Rossi-cucina', 'Smith-kitchen'],
+  ['Rossi-bagno', 'Smith-bathroom'], ['Sopralluoghi', 'Surveys'], ['misure-cucina', 'kitchen-measures'], ['elenco-materiali', 'materials-list'], ['relazione-cantiere', 'site-report'],
+  ['vecchi/bozza', 'old/draft'], ['bozza', 'draft'], ['Officina', 'Workshop'], ['Lun–Ven 08:00–18:00', 'Mon–Fri 08:00–18:00'], ['Giro 10:00: raggiunti 2 di 2', 'Round 10:00: reached 2 of 2']];
+const inglese = x => { if (!EN || x == null) return x; let t = JSON.stringify(x); for (const [a, b] of INGLESE) t = t.split(a).join(b); return JSON.parse(t); };
 
 const MOCK = `(() => { window.__ascolto = [];
   window.Capacitor = { isNativePlatform: () => true,
@@ -28,7 +35,8 @@ const cartelle = [
   { id: 'doc', uri: 'content://a/Doc', nome: 'Documenti ufficio', modo: 'entrambi' },
 ];
 
-async function nat(pl, m, o) {
+async function nat(pl, m, o) { return inglese(await natIt(pl, m, o)); }
+async function natIt(pl, m, o) {
   if (pl === 'BothWise') {
     if (m === 'controllaAggiornamento') return { v: stato.agg ? { installata: 35, nuova: true, versione: '0.9.1', novita: 'Correzioni e piccoli miglioramenti.', dimensione: 9437184 } : { installata: 35, nuova: false } };
     return { v: m === 'puoSbloccare' ? { ok: true, impronta: true } : {} };
@@ -73,8 +81,9 @@ async function nat(pl, m, o) {
     stato.popolato = conCartelle;
     const ctx = await b.newContext({ viewport: { width: 412, height: 860 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true, locale: 'it-IT' });
     await ctx.addInitScript(MOCK);
+    await ctx.addInitScript(en => { if (en) try { localStorage.setItem('bothwise_lingua', '"en"'); } catch (_) {} }, EN);
     await ctx.addInitScript(c => { try { localStorage.setItem('bothwise_animazioni', 'no'); localStorage.setItem('bothwise_blocco', 'no'); localStorage.setItem('bothwise_aggiornamenti', JSON.stringify({ ultimo: Date.now() })); if (c) localStorage.setItem('bothwise_conf', JSON.stringify(c)); } catch (_) {} },
-      conCartelle ? { nome: 'Telefono di Marco', cartelle, confermaCancellazioni: false, versioni: true, esclusioniDiSerie: true, esclusioni: ['*.tmp'], casellaDatiMobili: true, notifiche: true, grandiMB: 50, retiFidate: [] } : null);
+      conCartelle ? inglese({ nome: 'Telefono di Marco', cartelle, confermaCancellazioni: false, versioni: true, esclusioniDiSerie: true, esclusioni: ['*.tmp'], casellaDatiMobili: true, notifiche: true, grandiMB: 50, retiFidate: [] }) : null);
     await ctx.exposeFunction('__nat', nat);
     const p = await ctx.newPage(); await p.goto(URL); await p.waitForTimeout(900); return p;
   }
@@ -93,9 +102,9 @@ async function nat(pl, m, o) {
   p = await pagina(true);
   await prova('home', async () => { await foto(p, '04-home'); await foto(p, '04b-home-intera', true); });
   await prova('avanzamento', async () => {
-    await p.evaluate(() => window.__evento({ tipo: 'avanzamento', dispositivo: 'Tablet di bottega', cartella: 'foto', percorso: 'cantiere-rossi/VID_0412.mp4', fileFatti: 2, fileTotali: 5, byteFatti: 90e6, byteTotali: 210e6, secondi: 12, finito: false }));
+    await p.evaluate(d => window.__evento({ tipo: 'avanzamento', dispositivo: d, cartella: 'foto', percorso: 'cantiere-rossi/VID_0412.mp4', fileFatti: 2, fileTotali: 5, byteFatti: 90e6, byteTotali: 210e6, secondi: 12, finito: false }), EN ? 'Workshop tablet' : 'Tablet di bottega');
     await p.waitForTimeout(500); await p.screenshot({ path: path.join(OUT, '05-avanzamento.png'), clip: { x: 0, y: 0, width: 412, height: 330 } });
-    await p.evaluate(() => window.__evento({ tipo: 'avanzamento', dispositivo: 'Tablet di bottega', cartella: 'foto', percorso: null, fileFatti: 5, fileTotali: 5, byteFatti: 210e6, byteTotali: 210e6, secondi: 40, finito: true }));
+    await p.evaluate(d => window.__evento({ tipo: 'avanzamento', dispositivo: d, cartella: 'foto', percorso: null, fileFatti: 5, fileTotali: 5, byteFatti: 210e6, byteTotali: 210e6, secondi: 40, finito: true }), EN ? 'Workshop tablet' : 'Tablet di bottega');
   });
   await prova('cartella', async () => { await tocca(p, '[data-az="apriCartella"][data-arg="foto"]', 600); await foto(p, '06-cartella-dettaglio'); await tocca(p, '[data-az="chiudiLista"]'); });
   await prova('dispositivo', async () => { await tocca(p, '[data-az="apriDispositivo"]', 600); await foto(p, '07-dispositivo'); await tocca(p, '#finNo'); });

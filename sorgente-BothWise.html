@@ -886,6 +886,7 @@
   "Preparo la cartella…": "Preparing the folder…",
   "Prima abbina un dispositivo.": "First pair a device.",
   "Privacy:": "Privacy:",
+  "Pronto": "Ready",
   "Quando cambi, aggiungi o togli un file, arriva anche sull'altro dispositivo. I file tolti restano # giorni nel cestino.": "When you change, add or remove a file, it reaches the other device too. Removed files stay in the bin for # days.",
   "Quando i dispositivi non sono nella stessa Wi‑Fi, si scambiano le modifiche attraverso il tuo Google Drive o il tuo Dropbox (scegli tu), come in una cassetta delle lettere chiusa a chiave: il servizio vede solo dati cifrati, senza nomi né contenuti. Usa lo stesso servizio e lo stesso account su tutti i dispositivi; dopo il collegamento, i dispositivi devono incontrarsi una volta nella stessa Wi‑Fi per scambiarsi la chiave.": "When devices are not on the same Wi‑Fi, they exchange changes through your Google Drive or your Dropbox (your choice), like a locked mailbox: the service only sees encrypted data, with no names or contents. Use the same service and the same account on all devices; after connecting, the devices must meet once on the same Wi‑Fi to exchange the key.",
   "Quando sincronizzare": "When to sync",
@@ -1102,9 +1103,11 @@
   "max # MB/s": "max # MB/s",
   "nessun account e nessun server nostro. I file viaggiano solo tra i tuoi dispositivi abbinati, cifrati; fuori dalla Wi‑Fi (se lo colleghi) passano dal tuo Google Drive o Dropbox, cifrati e con nomi illeggibili. Nessuna pubblicità, nessun tracciamento. Informativa completa: crslabs.github.io/privacy/bothwise.html": "no account and no server of ours. Files travel only between your paired devices, encrypted; away from Wi‑Fi (if you connect it) they go through your Google Drive or Dropbox, encrypted and with unreadable names. No ads, no tracking. Full policy: crslabs.github.io/privacy/bothwise.html",
   "oggi alle §": "today at §",
+  "sempre raggiungibile": "always reachable",
   "spostato o rinominato": "moved or renamed",
   "su un altro dispositivo da": "on another device from",
   "tenuti": "kept",
+  "tocca per cambiare": "tap to change",
   "tocca per installarla": "tap to install it",
   "tolto (nel cestino)": "removed (in the bin)",
   "tolto (nel cestino) · da «@» · Documenti ufficio · §": "removed (in the bin) · from «@» · Documenti ufficio · §",
@@ -1156,6 +1159,9 @@
   "· # B · tolto §": "· # B · removed §",
   "· # KB · sostituito §": "· # KB · replaced §",
   "· # KB · tolto §": "· # KB · removed §",
+  "· Invia e ricevi": "· Send and receive",
+  "· Solo invio": "· Send only",
+  "· Solo ricezione": "· Receive only",
   "· da «@» ·": "· from «@» ·",
   "· in attesa della chiave da un altro dispositivo (stessa Wi‑Fi)": "· waiting for the key from another device (same Wi‑Fi)",
   "· §": "· §",
@@ -2530,7 +2536,7 @@
     }
     function riempiImpostazioni() {
       const c = conf(), asc = stato && stato.ascolto;
-      $('riass_dispositivo').textContent = (c.nome || 'Senza nome') + (asc && asc.attivo ? ' · sempre raggiungibile' : '');
+      $('riass_dispositivo').textContent = (c.nome || L('Senza nome')) + (asc && asc.attivo ? ' · ' + L('sempre raggiungibile') : '');   // il nome è di chi usa l'app: si traduce solo il resto
       $('impNomeSotto').textContent = c.nome || 'Come appare agli altri dispositivi';
       $('impAscolto').setAttribute('aria-checked', asc && asc.attivo ? 'true' : 'false');
       $('impDriveSotto').textContent = descriviCasella();
@@ -2560,7 +2566,7 @@
       $('impBloccoSotto').textContent = !puoBloccare ? 'Il telefono non ha impronta, PIN o sequenza: impostali in Android per usare il blocco' :
         bloccoScelto() ? 'All\'apertura e quando torni in BothWise: impronta, oppure PIN o sequenza del telefono' : 'Spento: chi prende il telefono vede le cartelle e i dispositivi';
       $('impConfermaSotto').textContent = c.confermaCancellazioni ? 'I file tolti altrove restano qui finché non decidi tu' : 'Spenta: i file tolti altrove vanno subito nel cestino';
-      $('impAscoltoSotto').textContent = asc && asc.attivo ? String(asc.descrizione || '') + ' · tocca per cambiare' : 'Solo con BothWise aperto';
+      $('impAscoltoSotto').textContent = asc && asc.attivo ? String(asc.descrizione || '') + ' · ' + L('tocca per cambiare') : 'Solo con BothWise aperto';
       const t = leggi('bothwise_tema', 'auto'), te = sceltaTesto();
       document.querySelectorAll('#sceltaTema [data-tema]').forEach(x => x.setAttribute('aria-checked', x.dataset.tema === t ? 'true' : 'false'));
       document.querySelectorAll('#sceltaLingua [data-lingua]').forEach(x => x.setAttribute('aria-checked', x.dataset.lingua === leggi('bothwise_lingua', 'auto') || (x.dataset.lingua === 'auto' && !['it', 'en'].includes(leggi('bothwise_lingua', 'auto'))) ? 'true' : 'false'));
