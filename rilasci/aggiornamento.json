@@ -1,0 +1,8 @@
+{
+ "pacchetto": "it.bothwise.app",
+ "versionCode": 36,
+ "versione": "0.9.1",
+ "apk": "BothWise-0.9.1.apk",
+ "sha256": "fcf67d84581380f8acf5cc4356cffa64d4a4ec155464e61822c01d9af3c752b0",
+ "novita": "Prima versione pubblica: sincronizzazione anche da lontano con il tuo Google Drive o Dropbox (cifrata), aggiornamenti automatici, guida e tutorial nuovi."
+}
