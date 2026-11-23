@@ -1397,6 +1397,7 @@
       document.addEventListener('mouseup', () => fine('m'), opz);
     }
     scorriPerChiudere($('avviso'), () => { clearTimeout(timerAvviso); if (animAvviso) { animAvviso.cancel(); animAvviso = null; } const e = $('avviso'); e.classList.add('hidden'); delete e.dataset.esce; }, 'giu', true);
+    window.__avviso = avviso;   // per le prove (notifiche in basso, chiuse con il dito)
 
     // ---------- finestra: risolve con { esito: 'si' | 'alt' | 'no', testo } ----------
     function finestra({ titolo, testoMsg, si = 'OK', alt = '', no = 'Annulla', evidenza = '', campo = false, codice = false, segnaposto = '', valore = '', errore = '', qr = null }) {
