@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.bothwise.app",
- "versionCode": 37,
- "versione": "0.9.2",
- "apk": "BothWise-0.9.2.apk",
- "sha256": "88ad50624e5dfff8143a41711727b509442e52e942e592c1a232d64db8f4adb1",
- "novita": "Fluidità dello schermo a scelta; Impostazioni come nelle altre app CrsLabs (Aspetto e Aggiornamenti); BothWise è software libero (GPL)."
+ "versionCode": 38,
+ "versione": "0.9.3",
+ "apk": "BothWise-0.9.3.apk",
+ "sha256": "a9ee5a36d13aae86d6ff40b479bc1461c11f3e854cddddfb7ba911b41fa2e0bb",
+ "novita": "Fuori dalla Wi‑Fi, con l'app aperta, le modifiche arrivano da sole; notifiche in basso; Impostazioni più fluide."
 }
