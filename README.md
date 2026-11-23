@@ -6,7 +6,7 @@
 <p align="center"><b>Your folders, the same everywhere.</b><br>
 No cloud, no account, no server.</p>
 
-<p align="center">Android 10+ · v0.9.3 · English and Italian · Free and open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v0.9.4 · English and Italian · Free and open source (GPL-3.0)</p>
 
 ---
 

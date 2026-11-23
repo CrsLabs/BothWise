@@ -830,3 +830,4 @@ Fuori dalla Wi‑Fi: sincronizzato tramite Google Drive => Away from Wi‑Fi: sy
 Fuori dalla Wi‑Fi: sincronizzato tramite Dropbox => Away from Wi‑Fi: synced through Dropbox
 Fuori dalla Wi‑Fi: si sincronizza tramite Google Drive => Away from Wi‑Fi: syncs through Google Drive
 Fuori dalla Wi‑Fi: si sincronizza tramite Dropbox => Away from Wi‑Fi: syncs through Dropbox
+Fuori dalla Wi‑Fi lo stato dice «sincronizzato tramite Google Drive» (o Dropbox) invece di «Nessuno raggiungibile». => Away from Wi‑Fi the status says «synced through Google Drive» (or Dropbox) instead of «Nobody reachable».
