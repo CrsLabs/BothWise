@@ -32,6 +32,7 @@ The native parts (network, folders, Drive and Dropbox, fingerprint) are tested o
 ## Publishing a version
 1. Build and sign the APK (signing happens outside GitHub: keys never go into the repository).
 2. Update `rilasci/aggiornamento.json` (`versionCode`, `versione`, `apk`, the APK's `sha256`, `novita` = what's new, shown in the app).
+   Also add the English release notes of the new version to `rilasci/release-notes.json` on the `rilasci` branch: GitHub Releases are published in English only.
 3. On the **`rilasci`** branch (it only holds the automation, the APK and `aggiornamento.json`) remove the old APK, add the new one and the new `aggiornamento.json`, and push.
 4. The `.github/workflows/rilascio.yml` automation on that branch checks the APK fingerprint and creates the `vX.Y.Z` Release with both files by itself.
 Installed apps find it by themselves within a week (`Aggiornamento.java`: https from GitHub only, SHA-256 fingerprint, same package, newer version, same signature).

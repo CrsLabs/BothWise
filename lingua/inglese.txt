@@ -826,3 +826,7 @@ Succede se l'accesso è già stato tolto dall'account o se manca internet. Puoi 
 Se un altro dispositivo usa ancora Google Drive, scollega anche quello: altrimenti la cartella torna al suo prossimo giro. => If another device still uses Google Drive, disconnect that one too: otherwise the folder comes back at its next round.
 Se un altro dispositivo usa ancora Dropbox, scollega anche quello: altrimenti la cartella torna al suo prossimo giro. => If another device still uses Dropbox, disconnect that one too: otherwise the folder comes back at its next round.
 Fuori dalla Wi‑Fi, con l'app aperta, le modifiche arrivano da sole; notifiche in basso; Impostazioni più fluide. => Away from Wi‑Fi, with the app open, changes arrive by themselves; notifications at the bottom; smoother Settings.
+Fuori dalla Wi‑Fi: sincronizzato tramite Google Drive => Away from Wi‑Fi: synced through Google Drive
+Fuori dalla Wi‑Fi: sincronizzato tramite Dropbox => Away from Wi‑Fi: synced through Dropbox
+Fuori dalla Wi‑Fi: si sincronizza tramite Google Drive => Away from Wi‑Fi: syncs through Google Drive
+Fuori dalla Wi‑Fi: si sincronizza tramite Dropbox => Away from Wi‑Fi: syncs through Dropbox

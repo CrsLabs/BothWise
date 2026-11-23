@@ -393,6 +393,10 @@ async function nat(d, pl, m, o) {
     esito('collegato a Google Drive', disp.B.drive === true && disp.B.servizio === 'google' && /Collegato a Google Drive/.test(await B.locator('#impDriveSotto').textContent()));
     await tocca(B, '[data-az="chiudiImpostazioni"]');
     esito('in Home lo stato dice «Google Drive»', /Google Drive/.test(await B.locator('#statoRete').textContent()));
+    // nessuno nella stessa Wi‑Fi ma la casella funziona: niente «Nessuno raggiungibile», si dice che ci si sincronizza dal Drive
+    await evento(disp.B, { tipo: 'sincronizzato', raggiunti: 0, abbinati: 1, ricevuti: 0 }); await B.waitForTimeout(400);
+    { const t = await B.locator('#statoRete').textContent(), pal = await B.locator('#pallino').getAttribute('class');
+      esito('fuori dalla Wi‑Fi con il Drive: «sincronizzato tramite Google Drive», pallino verde', /Fuori dalla Wi‑Fi: s(incronizzato|i sincronizza) tramite Google Drive/.test(t) && !/Nessuno raggiungibile/.test(t) && /\bok\b/.test(pal), t + ' ' + pal); }
     await evento(disp.B, { tipo: 'casella', ricevuti: 0, errore: 'L\'accesso a Google Drive è scaduto o è stato revocato: collega di nuovo l\'account.', ricollegare: true });
     await B.waitForTimeout(300);
     esito('errore della casella mostrato chiaramente', /collega di nuovo/.test(await B.locator('#avvisoTesto').textContent()));

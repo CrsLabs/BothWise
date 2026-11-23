@@ -708,6 +708,10 @@
   "Fuori dalla Wi‑Fi": "Away from Wi‑Fi",
   "Fuori dalla Wi‑Fi si usano anche i dati del telefono.": "Away from Wi‑Fi, mobile data is used too.",
   "Fuori dalla Wi‑Fi, con l'app aperta, le modifiche arrivano da sole; notifiche in basso; Impostazioni più fluide.": "Away from Wi‑Fi, with the app open, changes arrive by themselves; notifications at the bottom; smoother Settings.",
+  "Fuori dalla Wi‑Fi: si sincronizza tramite Dropbox": "Away from Wi‑Fi: syncs through Dropbox",
+  "Fuori dalla Wi‑Fi: si sincronizza tramite Google Drive": "Away from Wi‑Fi: syncs through Google Drive",
+  "Fuori dalla Wi‑Fi: sincronizzato tramite Dropbox": "Away from Wi‑Fi: synced through Dropbox",
+  "Fuori dalla Wi‑Fi: sincronizzato tramite Google Drive": "Away from Wi‑Fi: synced through Google Drive",
   "Giorni e orario": "Days and hours",
   "Gli altri tuoi dispositivi lo dimenticano da soli al primo incontro nella stessa Wi‑Fi: da quel momento non scambia più niente con nessuno.\n\nSe è stato perso o rubato, bloccalo o cancellalo a distanza da un computer o da un altro telefono: google.com/android/find («Trova il mio dispositivo»).": "Your other devices forget it by themselves the first time they meet it on the same Wi‑Fi: from then on it exchanges nothing with anyone.\n\nIf it was lost or stolen, lock or erase it remotely from a computer or another phone: google.com/android/find («Find My Device»).",
   "Gli altri tuoi dispositivi lo dimenticano da soli: al primo incontro nella stessa Wi‑Fi o, se usi Google Drive o Dropbox, al loro prossimo scambio attraverso il servizio.\n\nSe è stato perso o rubato, fai anche queste due cose (da un computer o da un altro telefono):\n#. Togligli il tuo account Google: myaccount.google.com → Sicurezza → I tuoi dispositivi → scegli quel dispositivo → Esci. Oppure cambia la password di Google. Se usi Dropbox: dropbox.com → Impostazioni → Sicurezza → Dispositivi → Scollega.\n#. Bloccalo o cancellalo a distanza: google.com/android/find («@»).": "Your other devices will forget it on their own: at their first meeting on the same Wi‑Fi or, if you use Google Drive or Dropbox, at their next exchange through the service.\n\nIf it was lost or stolen, also do these two things (from a computer or another phone):\n#. Remove your Google account from it: myaccount.google.com → Security → Your devices → choose that device → Sign out. Or change your Google password. If you use Dropbox: dropbox.com → Settings → Security → Devices → Unlink.\n#. Lock or erase it remotely: google.com/android/find («@»).",
@@ -1551,11 +1555,17 @@
       let testo = 'Pronto', liv = 'ok';
       if (stato && stato.permessoRete === 'mancante') { testo = 'Manca il permesso «Dispositivi nelle vicinanze»'; liv = 'errore'; }
       else if (!disp.length) { testo = 'Nessun dispositivo abbinato'; liv = 'attesa'; }
+      else if (rete && rete.raggiunti === 0 && casella && casella.collegato && !casella.errore) {
+        // nessuno nella stessa Wi‑Fi, ma la casella su Drive/Dropbox funziona: non è un problema, ci si sincronizza da lì
+        const g = Number(casella.ultimoGiro) || 0;
+        testo = g ? `Fuori dalla Wi‑Fi: sincronizzato tramite ${nomeServ()} · ${quando(g)}` : `Fuori dalla Wi‑Fi: si sincronizza tramite ${nomeServ()}`;
+      }
       else if (rete) {
         testo = rete.raggiunti === 0 ? 'Nessuno raggiungibile ora (stessa Wi‑Fi? app aperta?)' : `${rete.raggiunti} di ${rete.abbinati} raggiungibili · ${quando(rete.quando)}`;
         liv = rete.raggiunti === 0 ? 'attesa' : 'ok';
       }
-      $('statoRete').textContent = testo + (asc ? ' · sempre raggiungibile' : '') + (casella && casella.collegato ? ' · ' + nomeServ() : '');
+      const giaServ = testo.includes(nomeServ());
+      $('statoRete').textContent = testo + (asc ? ' · sempre raggiungibile' : '') + (casella && casella.collegato && !giaServ ? ' · ' + nomeServ() : '');
       $('pallino').className = 'bw-pallino ' + liv;
 
       // primi passi
