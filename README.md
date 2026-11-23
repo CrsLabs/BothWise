@@ -3,140 +3,137 @@
 </p>
 
 <h1 align="center">BothWise</h1>
-<p align="center"><b>Le tue cartelle, uguali ovunque.</b><br>
-Senza cloud, senza account, senza server.</p>
+<p align="center"><b>Your folders, the same everywhere.</b><br>
+No cloud, no account, no server.</p>
 
-<p align="center">Android 10+ · v0.9.2 · Italiano e English · Gratis e open source (GPL-3.0)</p>
+<p align="center">Android 10+ · v0.9.2 · English and Italian · Free and open source (GPL-3.0)</p>
 
 ---
 
-## Installare
+## Install
 
-1. Apri la pagina **[Releases](../../releases/latest)** di questo repository da ogni telefono o tablet.
-2. Scarica il file `BothWise-….apk` e aprilo. La prima volta Android chiede di permettere l'installazione dal browser o dall'app File.
-3. Fatto. Le versioni successive arrivano da sole: BothWise controlla una volta a settimana se ce n'è una nuova (si può spegnere in Impostazioni → Aggiornamenti) e Android chiede sempre la conferma.
+1. Open the **[Releases](../../releases/latest)** page of this repository on each phone or tablet.
+2. Download the `BothWise-….apk` file and open it. The first time, Android asks you to allow installs from the browser or the Files app.
+3. Done. Later versions arrive by themselves: BothWise checks once a week for a new one (can be turned off in Settings → Updates) and Android always asks for confirmation.
 
-Si installa sopra la versione precedente senza perdere cartelle e abbinamenti. Serve **Android 10 o più recente**.
+It installs over the previous version without losing folders and pairings. It needs **Android 10 or later**.
 
-## Cos'è
+## What it is
 
-BothWise tiene **identiche** le cartelle che scegli su più dispositivi che si trovano nella stessa rete Wi‑Fi. I file passano **direttamente da un dispositivo all'altro**, solo tra quelli che hai abbinato tu, con un collegamento cifrato. Nessuna registrazione, nessun server, nessuna pubblicità, nessun tracciamento.
+BothWise keeps the folders you choose **identical** on several devices on the same Wi‑Fi network. Files go **directly from one device to another**, only between those you paired yourself, over an encrypted connection. No sign‑up, no server, no ads, no tracking.
 
-Pensata per persone non tecniche: poche scelte chiare, testi in italiano semplice, e una regola che non si tocca: **mai perdere un file**.
-
-<p align="center">
-  <img src="guida/img/04-home.png" alt="Schermata principale" width="200">
-  &nbsp;
-  <img src="guida/img/06-cartella-dettaglio.png" alt="Dettaglio di una cartella" width="200">
-  &nbsp;
-  <img src="guida/img/05-avanzamento.png" alt="Avanzamento della sincronizzazione" width="200">
-</p>
-
-## Funzioni principali
-
-### Collegare i dispositivi
-- **Abbinamento in pochi secondi** con un codice o con un **QR**: un dispositivo lo mostra, l'altro lo inquadra.
-- Con tre o più dispositivi basta abbinarne uno: gli altri si **presentano tra loro** da soli.
-- **Sincronizzazione automatica**: quando una cartella cambia, BothWise se ne accorge e invia le modifiche. Opzione «Sempre raggiungibile» per restare in ascolto.
-- Un dispositivo perso si **dimentica** da uno solo: gli altri lo sanno al primo incontro.
-
-### Scegliere cosa sincronizzare
-- Cartelle del telefono scelte con il selettore di Android, senza permessi «su tutto».
-- **Cartelle pronte** con un tocco: *Foto della fotocamera*, *Documenti*, *Download*.
-- **Condividi con BothWise** dal menù di Android: il file finisce nella cartella «Condivisi».
-- Tre modi per ogni cartella: **invia e ricevi**, **solo invio**, **solo ricezione**.
-- **File da non sincronizzare**: regole di serie (file temporanei e simili) e regole tue, una per riga.
-- **Gestire i file dall'app**: sfogli le cartelle sincronizzate, apri i file con l'app giusta, li condividi, li rinomini, sposti ed elimini (nel cestino), aggiungi file o sottocartelle.
-- **Ricevi file, come AirDrop**: un interruttore in Home e un tasto nella barra rapida di Android aprono la ricezione per 10 minuti, anche con l'app chiusa.
-- **Un file a un solo dispositivo**: «Invia un file a un dispositivo» manda uno o più file solo a chi scegli, senza cartella; chi li riceve li salva dove vuole.
-
-### Mai perdere file
-- **Cestino**: i file tolti da un altro dispositivo non spariscono, si possono **ripristinare** (mai sovrascrivendo).
-- **«Chiedi prima di cancellare»**: le cancellazioni arrivano come proposta da approvare.
-- **Versioni precedenti**: ogni file cambiato altrove resta anche com'era, per 30 giorni.
-- **Conflitti conservati e risolti dall'app**: se due dispositivi cambiano lo stesso file, restano entrambe le versioni; tu scegli «Tieni l'originale», «Tieni l'altra» o «Tieni entrambe», senza perdere niente.
-- **Protezioni**: cartella vuota o senza permesso, cancellazioni o modifiche di massa improvvise, cartella spostata o scheda tolta, tutto viene fermato e ti viene chiesto cosa fare.
+Made for non‑technical people: few clear choices, plain language, and one rule that never changes: **never lose a file**.
 
 <p align="center">
-  <img src="guida/img/09-cestino.png" alt="Cestino" width="200">
+  <img src="guida/img-en/04-home.png" alt="Main screen" width="200">
   &nbsp;
-  <img src="guida/img/10-versioni.png" alt="Versioni precedenti" width="200">
+  <img src="guida/img-en/06-cartella-dettaglio.png" alt="A folder's details" width="200">
   &nbsp;
-  <img src="guida/img/15-file-da-non-sincronizzare.png" alt="Regole per i file da escludere" width="200">
+  <img src="guida/img-en/05-avanzamento.png" alt="Sync progress" width="200">
 </p>
 
-### Sotto controllo
-- **Avanzamento** in tempo reale (file e quantità) e **«Annulla il trasferimento»**.
-- **Ultime modifiche** in Home, per cartella e dispositivo.
-- **Pausa** di una cartella o di un dispositivo.
-- **Quando sincronizzare**: sempre, al più una volta all'ora, oppure solo in certi giorni e orari.
-- **Velocità massima** in invio (5, 2 o 1 MB al secondo) per non intasare la Wi‑Fi di casa.
-- **Condizioni** per i file grandi: solo in Wi‑Fi e con il telefono in carica; **reti di fiducia**.
-- **Spazio**: se manca, si liberano prima le versioni vecchie.
-- Notifiche solo quando serve una tua decisione.
+## Features
 
-### Sicurezza e privacy
-- Dispositivi riconosciuti per **identità crittografica**, collegamento **TLS 1.3**, file e nomi cifrati **AES‑256‑GCM**.
-- **Blocco con impronta** (o PIN/sequenza), niente contenuto nelle app recenti.
-- Nessun dato nelle copie di sicurezza di Android; **«Cancella tutto»** toglie abbinamenti, chiavi e impostazioni (i tuoi file restano).
-- La pagina dell'app **non ha accesso alla rete**: la rete è usata solo dal motore nativo.
-- Nessuna pubblicità, nessuna analitica di terzi.
+### Connecting devices
+- **Pairing in seconds** with a code or a **QR**: one device shows it, the other scans it.
+- With three or more devices you only need to pair one: the others **introduce themselves** automatically.
+- **Automatic sync**: when a folder changes, BothWise notices and sends the changes. «Always reachable» option to keep listening.
+- A lost device is **forgotten** from just one of yours: the others learn it at the first meeting.
+
+### Choosing what to sync
+- Phone folders chosen with the Android picker, with no «everything» permissions.
+- **Ready‑made folders** in one tap: *Camera photos*, *Documents*, *Download*.
+- **Share with BothWise** from the Android menu: the file goes into the «Shared» folder.
+- Three modes per folder: **send and receive**, **send only**, **receive only**.
+- **Files not to sync**: built‑in rules (temporary files and the like) and your own rules, one per line.
+- **Manage files in the app**: browse synced folders, open files with the right app, share, rename, move and delete them (into the bin), add files or subfolders.
+- **Receive files, like AirDrop**: a switch on the Home and a button in the Android quick settings open reception for 10 minutes, even with the app closed.
+- **A file to one device only**: «Send a file to a device» sends one or more files only to whoever you choose, without a folder; the receiver saves them where they like.
+
+### Never lose files
+- **Bin**: files removed by another device don't vanish, they can be **restored** (never overwriting).
+- **«Ask before deleting»**: deletions arrive as a proposal to approve.
+- **Previous versions**: every file changed elsewhere is also kept as it was, for 30 days.
+- **Conflicts kept and resolved in the app**: if two devices change the same file, both versions stay; you choose «Keep the original», «Keep the other» or «Keep both», losing nothing.
+- **Protections**: empty folder or lost permission, sudden mass deletions or changes, moved folder or removed card: everything is stopped and you're asked what to do.
 
 <p align="center">
-  <img src="guida/img/17-sicurezza-e-dati.png" alt="Sicurezza e dati" width="200">
+  <img src="guida/img-en/09-cestino.png" alt="Bin" width="200">
   &nbsp;
-  <img src="guida/img/12-impostazioni.png" alt="Impostazioni" width="200">
+  <img src="guida/img-en/10-versioni.png" alt="Previous versions" width="200">
   &nbsp;
-  <img src="guida/img/13-aspetto.png" alt="Aspetto" width="200">
+  <img src="guida/img-en/15-file-da-non-sincronizzare.png" alt="Rules for excluded files" width="200">
 </p>
 
-### Comodità
-Italiano e English, tema chiaro/scuro, tre dimensioni del testo, animazioni e vibrazione regolabili, schermo a frequenza massima, segnalazione di un problema con le informazioni tecniche già pronte.
+### Under control
+- Live **progress** (files and amount) and **«Cancel the transfer»**.
+- **Latest changes** on the Home, by folder and device.
+- **Pause** a folder or a device.
+- **When to sync**: always, at most once an hour, or only on certain days and hours.
+- **Maximum sending speed** (5, 2 or 1 MB per second) so your home Wi‑Fi doesn't get clogged.
+- **Conditions** for large files: only on Wi‑Fi and with the phone charging; **trusted networks**.
+- **Space**: if it runs out, old versions are freed first.
+- Notifications only when a decision of yours is needed.
 
-### Anche da lontano
-**Fuori dalla Wi‑Fi**: una «cassetta delle lettere» cifrata sul **tuo** Google Drive o Dropbox, per sincronizzare anche quando i dispositivi non sono vicini. Il servizio vede solo dati cifrati, senza nomi né contenuti; su Google Drive BothWise chiede solo il permesso `drive.file` (vede solo i file che crea lei).
+### Away from Wi‑Fi
+An encrypted «mailbox» on **your** Google Drive or Dropbox, to sync even when the devices aren't close. The service sees only encrypted data, with no names or contents; on Google Drive BothWise requests only the `drive.file` permission (it sees only the files it creates).
 
-### Aggiornamenti
-Una volta a settimana BothWise controlla su GitHub se c'è una versione nuova; si installa solo se è firmata come l'app che hai e se è proprio il file pubblicato.
+### Security and privacy
+- Devices recognised by **cryptographic identity**, **TLS 1.3** connection, files and names encrypted with **AES‑256‑GCM**.
+- **Fingerprint lock** (or PIN/pattern), no content in recent apps.
+- No data in Android's backups; **«Erase everything»** removes pairings, keys and settings (your files stay).
+- The app page **has no network access**: the network is used only by the native engine.
+- No ads, no third‑party analytics.
 
-## Come funziona
+<p align="center">
+  <img src="guida/img-en/17-sicurezza-e-dati.png" alt="Security and data" width="200">
+  &nbsp;
+  <img src="guida/img-en/12-impostazioni.png" alt="Settings" width="200">
+  &nbsp;
+  <img src="guida/img-en/13-aspetto.png" alt="Appearance" width="200">
+</p>
+
+### Comfort
+English and Italian, light/dark theme, three text sizes, animations, screen smoothness and vibration adjustable, problem reports with the technical information ready. **Updates** from GitHub once a week: an update installs only if it is signed like the app you have and is exactly the published file.
+
+## How it works
 ```
- Telefono  ⇄  Wi‑Fi (TLS 1.3, solo dispositivi abbinati)  ⇄  Tablet
-     │                                                          │
-  Cartelle (Storage Access Framework)             Cartelle (idem)
-     └────────── motore PairWood: blocchi, versioni, cestino ─────┘
+ Phone  ⇄  Wi‑Fi (TLS 1.3, paired devices only)  ⇄  Tablet
+   │                                                   │
+ Folders (Storage Access Framework)          Folders (same)
+   └───── PairWood engine: blocks, versions, bin ──────┘
 ```
-Il motore **PairWood** (di CrsLabs) divide i file in blocchi, invia solo ciò che è cambiato, riconosce spostamenti e conflitti e documenta il proprio protocollo.
+The **PairWood** engine (by CrsLabs) splits files into blocks, sends only what changed, recognises moves and conflicts, and documents its own protocol.
 
-## Documentazione
-| Cosa | Dove |
+## Documentation
+| What | Where |
 |---|---|
-| Guida all'uso con immagini (PDF) | [`guida/BothWise-Guida.pdf`](guida/BothWise-Guida.pdf) |
-| Tutorial «come si fa» per ogni funzione (PDF) | [`guida/BothWise-Tutorial.pdf`](guida/BothWise-Tutorial.pdf) |
-| Istruzioni per chi sviluppa | [`SVILUPPO.md`](SVILUPPO.md) |
-| Informativa sulla privacy | [`PRIVACY.md`](PRIVACY.md) · [crslabs.github.io/privacy/bothwise.html](https://crslabs.github.io/privacy/bothwise.html) |
+| User guide with screenshots (PDF) | [`guida/BothWise-Guide-EN.pdf`](guida/BothWise-Guide-EN.pdf) · Italian: [`guida/BothWise-Guida.pdf`](guida/BothWise-Guida.pdf) |
+| «How to» tutorials (PDF) | [`guida/BothWise-Tutorials-EN.pdf`](guida/BothWise-Tutorials-EN.pdf) · Italian: [`guida/BothWise-Tutorial.pdf`](guida/BothWise-Tutorial.pdf) |
+| Developer notes | [`DEVELOPMENT.md`](DEVELOPMENT.md) |
+| Privacy policy | [`PRIVACY.md`](PRIVACY.md) · [crslabs.github.io/privacy/bothwise.html](https://crslabs.github.io/privacy/bothwise.html) |
 
-Guida e tutorial sono divisi nelle stesse sei parti (Per cominciare, Le cartelle, Sincronizzare, Non perdere file, Dispositivi e sicurezza, Aspetto e aiuto), con l'indice e i numeri di pagina.
+The code and its comments are in Italian; folder names too (`guida` = guide, `prove` = tests, `lingua` = language, `rilasci` = releases, `icona` = icon).
 
-## Compilare
+## Build
 ```
 npm install
 python3 costruisci.py
 npx cap sync android
 cd android && ./gradlew assembleRelease
 ```
-Per l'APK firmato serve la chiave di firma, che **non** è in questo repository: senza, Gradle produce un APK non firmato da provare in proprio. Dettagli in [`SVILUPPO.md`](SVILUPPO.md).
+A signed APK needs the signing key, which is **not** in this repository: without it Gradle produces an unsigned APK for your own testing. Details in [`DEVELOPMENT.md`](DEVELOPMENT.md).
 
-## Sostieni BothWise
+## Support BothWise
 
-BothWise è gratis, senza pubblicità e senza raccogliere dati. Se ti è utile puoi offrire un caffè: **[ko-fi.com/crslabs](https://ko-fi.com/crslabs)**.
+BothWise is free, with no ads and no data collection. If you find it useful you can buy me a coffee: **[ko-fi.com/crslabs](https://ko-fi.com/crslabs)**.
 
-## Contatti
+## Contact
 
-Problemi, idee, domande: **crslabs.info@gmail.com**, oppure «Segnala un problema o un'idea» dentro l'app.
+Problems, ideas, questions: **crslabs.info@gmail.com**, or «Report a problem or an idea» inside the app.
 
-## Licenza
+## Licence
 
-© 2026 CrsLabs. BothWise è software libero: puoi usarlo, studiarlo, modificarlo e ridistribuirlo secondo i termini della **GNU General Public License versione 3 o successiva** (testo completo in [`LICENSE`](LICENSE)). È distribuito nella speranza che sia utile, ma **senza alcuna garanzia**.
+© 2026 CrsLabs. BothWise is free software: you can use, study, modify and redistribute it under the terms of the **GNU General Public License version 3 or later** (full text in [`LICENSE`](LICENSE)). It is distributed in the hope that it will be useful, but **without any warranty**.
 
-Componenti di terzi: [Capacitor](https://capacitorjs.com) (licenza MIT), icone Font Awesome Free (CC BY 4.0) in parte ridisegnate, e le altre elencate in «Informazioni e licenze» dentro l'app. Il motore di sincronizzazione PairWood è di CrsLabs e qui è incluso già compilato in `android/pairwood-sdk`.
+Third-party components: [Capacitor](https://capacitorjs.com) (MIT licence), Font Awesome Free icons (CC BY 4.0) partly redrawn, and the others listed in «Information and licences» inside the app. The PairWood sync engine belongs to CrsLabs and is included here precompiled in `android/pairwood-sdk`.
