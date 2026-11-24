@@ -721,7 +721,7 @@ async function nat(d, pl, m, o) {
     await tocca(B, '#listaCorpo [data-az="sfogliaAltri"]', 500);
     esito('«Mostra altri» li porta tutti', await B.locator('#listaCorpo .bw-file').count() === 200 && await B.locator('#listaCorpo [data-az="sfogliaAltri"]').count() === 0);
     await B.locator('#sfCerca').fill('img07'); await B.waitForTimeout(500);
-    esito('la ricerca filtra i nomi (img070…img079 e img007)', await B.locator('#listaCorpo .bw-file').count() === 11 && /11 trovati su 200/.test(await B.locator('#listaCorpo').textContent()));
+    esito('la ricerca filtra i nomi (img070…img079)', await B.locator('#listaCorpo .bw-file').count() === 10 && /10 trovati su 200/.test(await B.locator('#listaCorpo').textContent()));
     esito('scrivendo, la tastiera resta nel campo di ricerca', await B.evaluate(() => document.activeElement && document.activeElement.id === 'sfCerca'));
     await tocca(B, '#listaCorpo [data-az="sfogliaCercaNo"]', 400);
     esito('«X» cancella la ricerca', await B.locator('#sfCerca').inputValue() === '' && await B.locator('#listaCorpo .bw-file').count() === 150);
@@ -746,7 +746,7 @@ async function nat(d, pl, m, o) {
     rim(5); await rinfresca();
     esito('se i file in attesa cambiano, torna a dirlo', /5 file aspettano/.test(await A.locator('#protezioni').textContent()));
     // tolto il limite: l'avviso sparisce da solo e i file partono
-    await tocca(A, '#impBtn'); await sezione(A, 'condizioni'); rim(0);
+    if (await A.locator('#impBtn').isVisible()) await tocca(A, '#impBtn'); await sezione(A, 'condizioni'); rim(0);
     await tocca(A, 'button[data-grandi="0"]', 900);
     esito('tolto il limite l\'avviso non resta', !/aspett/.test(await A.locator('#protezioni').textContent()));
     esito('e parte una sincronizzazione', (disp.A.chiamate || []).filter(c => /sincronizza$/.test(c)).length > 0);
