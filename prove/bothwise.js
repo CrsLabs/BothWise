@@ -710,6 +710,49 @@ async function nat(d, pl, m, o) {
     disp.B.fileScelti = null;
   });
 
+  await passo('Sfogliare una cartella con molti file', async () => {
+    await B.locator('[data-az="chiudiLista"]').first().click({ timeout: 2000 }).catch(() => {}); await B.waitForTimeout(400);
+    const cid = Object.keys(disp.B.albero || {})[0];
+    disp.B.albero[cid] = Array.from({ length: 200 }, (_, i) => ({ percorso: `foto/img${String(i).padStart(3, '0')}.jpg`, dimensione: 1000 + i, modificato: Date.now() - (200 - i) * 60e3 }));
+    await tocca(B, '[data-az="apriCartella"]', 500); await tocca(B, '[data-az="apriSfoglia"]', 700);
+    await tocca(B, '#listaCorpo [data-az="sfogliaApri"]', 700);
+    esito('con tanti file compaiono ricerca e ordine', await B.locator('#sfCerca').count() === 1 && await B.locator('#listaCorpo [data-az="sfogliaOrd"]').count() === 3);
+    esito('se ne mostrano 150 e un tasto per gli altri', await B.locator('#listaCorpo .bw-file').count() === 150 && await B.locator('#listaCorpo [data-az="sfogliaAltri"]').count() === 1);
+    await tocca(B, '#listaCorpo [data-az="sfogliaAltri"]', 500);
+    esito('«Mostra altri» li porta tutti', await B.locator('#listaCorpo .bw-file').count() === 200 && await B.locator('#listaCorpo [data-az="sfogliaAltri"]').count() === 0);
+    await B.locator('#sfCerca').fill('img07'); await B.waitForTimeout(500);
+    esito('la ricerca filtra i nomi (img070…img079 e img007)', await B.locator('#listaCorpo .bw-file').count() === 11 && /11 trovati su 200/.test(await B.locator('#listaCorpo').textContent()));
+    esito('scrivendo, la tastiera resta nel campo di ricerca', await B.evaluate(() => document.activeElement && document.activeElement.id === 'sfCerca'));
+    await tocca(B, '#listaCorpo [data-az="sfogliaCercaNo"]', 400);
+    esito('«X» cancella la ricerca', await B.locator('#sfCerca').inputValue() === '' && await B.locator('#listaCorpo .bw-file').count() === 150);
+    await tocca(B, '#listaCorpo [data-arg="grandi"]', 400);
+    esito('«Più grandi» mette in cima il file più grande', /img199/.test(await B.locator('#listaCorpo .bw-file-nome').first().textContent()));
+    await tocca(B, '#listaCorpo [data-arg="recenti"]', 400);
+    esito('«Più recenti» mette in cima l\'ultimo', /img199/.test(await B.locator('#listaCorpo .bw-file-nome').first().textContent()));
+    await tocca(B, '#listaCorpo [data-arg="nome"]', 400);
+    esito('«Nome» li rimette in ordine alfabetico', /img000/.test(await B.locator('#listaCorpo .bw-file-nome').first().textContent()));
+    esito('«In fondo» e «In cima» ci sono', await B.locator('#listaCorpo [data-az="sfogliaSalta"]').count() === 2);
+    await B.locator('[data-az="chiudiLista"]').first().click({ timeout: 2000 }).catch(() => {}); await B.waitForTimeout(300);
+  });
+
+  await passo('Avviso dei file grandi in attesa', async () => {
+    const rim = a => { disp.A.rimandate = a; }, rinfresca = async () => { await A.evaluate(() => document.dispatchEvent(new Event('visibilitychange'))); await A.waitForTimeout(600); };
+    rim(2); await rinfresca();
+    esito('l\'avviso c\'è e ha la X', /2 file aspettano/.test(await A.locator('#protezioni').textContent()) && await A.locator('#protezioni [data-az="chiudiRim"]').count() === 1);
+    await tocca(A, '#protezioni [data-az="chiudiRim"]', 400);
+    esito('con la X sparisce', !/aspett/.test(await A.locator('#protezioni').textContent()));
+    await rinfresca();
+    esito('e non torna da solo', !/aspett/.test(await A.locator('#protezioni').textContent()));
+    rim(5); await rinfresca();
+    esito('se i file in attesa cambiano, torna a dirlo', /5 file aspettano/.test(await A.locator('#protezioni').textContent()));
+    // tolto il limite: l'avviso sparisce da solo e i file partono
+    await tocca(A, '#impBtn'); await sezione(A, 'condizioni'); rim(0);
+    await tocca(A, 'button[data-grandi="0"]', 900);
+    esito('tolto il limite l\'avviso non resta', !/aspett/.test(await A.locator('#protezioni').textContent()));
+    esito('e parte una sincronizzazione', (disp.A.chiamate || []).filter(c => /sincronizza$/.test(c)).length > 0);
+    await tocca(A, 'button[data-grandi="50"]', 500);
+  });
+
   await passo('Ricevi file (come AirDrop)', async () => {
     esito('«Ricevi file» è acceso di default (con dispositivi abbinati)', (await B.locator('#homeRicevi').getAttribute('aria-checked')) === 'true' && disp.B.ricezione.attiva);
     await tocca(B, '#homeRicevi', 700);
