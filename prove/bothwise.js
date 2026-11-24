@@ -751,6 +751,7 @@ async function nat(d, pl, m, o) {
     esito('tolto il limite l\'avviso non resta', !/aspett/.test(await A.locator('#protezioni').textContent()));
     esito('e parte una sincronizzazione', (disp.A.chiamate || []).filter(c => /sincronizza$/.test(c)).length > 0);
     await tocca(A, 'button[data-grandi="50"]', 500);
+    await A.locator('[data-az="chiudiImpostazioni"]').first().click({ timeout: 3000 }).catch(() => {}); await A.waitForTimeout(400);
   });
 
   await passo('Ricevi file (come AirDrop)', async () => {
