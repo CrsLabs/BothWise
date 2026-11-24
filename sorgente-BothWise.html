@@ -1816,7 +1816,7 @@
       if (lista.tipo === 'sfoglia' && sfoglia) {
         if (sfoglia.sposta) return sfogliaAnnullaSposta();
         if (sfoglia.multi) return sfogliaFine();
-        if (sfoglia.sub) { sfoglia.sub = sfoglia.sub.includes('/') ? sfoglia.sub.slice(0, sfoglia.sub.lastIndexOf('/')) : ''; sfoglia.scelto = null; return caricaSfoglia(); }
+        if (sfoglia.sub) { sfoglia.sub = sfoglia.sub.includes('/') ? sfoglia.sub.slice(0, sfoglia.sub.lastIndexOf('/')) : ''; sfoglia.scelto = null; return caricaSfoglia(true); }
         const id = sfoglia.cartella; sfoglia = null; return apriCartella(id);
       }
       chiudiLista();
@@ -2171,13 +2171,22 @@
     const iconaFile = n => /\.(jpe?g|png|gif|webp|heic|bmp)$/i.test(n) ? 'fa-image' : /\.pdf$/i.test(n) ? 'fa-file-pdf' : 'fa-copia';
     async function apriSfoglia(id) {
       sfoglia = { cartella: id, sub: '', voci: [], scelto: null, sposta: null, multi: false, sel: [] };
-      lista = { tipo: 'sfoglia' }; mostraLista(nomeCartella(id), 'Carico…', '', ''); await caricaSfoglia();
+      lista = { tipo: 'sfoglia' }; mostraLista(nomeCartella(id), 'Carico…', '', ''); await caricaSfoglia(true);
     }
-    async function caricaSfoglia() {
+    // Navigando (aprire una cartella, tornare indietro) si mostra subito ciò che si sapeva e si aggiorna appena arriva l'elenco nuovo;
+    // dopo un'azione (rinomina, sposta, elimina…) si aspetta sempre l'elenco vero.
+    const cacheSfoglia = new Map(); let seqSfoglia = 0;
+    async function caricaSfoglia(veloce) {
       if (!sfoglia) return;
-      try { sfoglia.voci = ((await pw('sfoglia', { cartella: sfoglia.cartella, sub: sfoglia.sub })).voci) || []; }
-      catch (e) { sfoglia.voci = []; avviso('Non riesco a leggere la cartella: ' + ((e && e.message) || e), 'errore'); }
-      disegnaSfoglia();
+      const s = sfoglia, chiave = s.cartella + '|' + s.sub, mia = ++seqSfoglia, vecchio = cacheSfoglia.get(chiave);
+      if (veloce === true && vecchio) { s.voci = vecchio; disegnaSfoglia(); }
+      try {
+        const nuove = ((await pw('sfoglia', { cartella: s.cartella, sub: s.sub })).voci) || [];
+        if (mia !== seqSfoglia || sfoglia !== s) return;   // nel frattempo si è andati altrove
+        cacheSfoglia.set(chiave, nuove);
+        const uguale = veloce === true && vecchio && JSON.stringify(vecchio) === JSON.stringify(nuove);
+        s.voci = nuove; if (!uguale) disegnaSfoglia();
+      } catch (e) { if (mia !== seqSfoglia) return; s.voci = []; avviso('Non riesco a leggere la cartella: ' + ((e && e.message) || e), 'errore'); disegnaSfoglia(); }
     }
     function disegnaSfoglia() {
       if (!lista || lista.tipo !== 'sfoglia' || !sfoglia) return;
@@ -2218,10 +2227,10 @@
     function sfogliaOrd(k) { if (!sfoglia) return; sfoglia.ord = k; sfoglia.max = 150; disegnaSfoglia(); }
     function sfogliaAltri() { if (!sfoglia) return; sfoglia.max = (sfoglia.max || 150) + 150; disegnaSfoglia(); }
     function sfogliaSalta(d) { const el = [...document.querySelectorAll('#listaCorpo .bw-file')]; const x = d === 'su' ? document.getElementById('listaCorpo') : el[el.length - 1]; if (x && x.scrollIntoView) x.scrollIntoView({ block: d === 'su' ? 'start' : 'end', behavior: 'smooth' }); }
-    function sfogliaVai(n) { if (!sfoglia) return; const p = sfoglia.sub ? sfoglia.sub.split('/') : []; sfoglia.sub = p.slice(0, Number(n)).join('/'); sfoglia.scelto = null; sfoglia.q = ''; sfoglia.max = 150; return caricaSfoglia(); }
+    function sfogliaVai(n) { if (!sfoglia) return; const p = sfoglia.sub ? sfoglia.sub.split('/') : []; sfoglia.sub = p.slice(0, Number(n)).join('/'); sfoglia.scelto = null; sfoglia.q = ''; sfoglia.max = 150; return caricaSfoglia(true); }
     async function sfogliaApri(i) {
       const v = sfoglia && sfoglia.voci[Number(i)]; if (!v) return;
-      if (v.cartella) { sfoglia.sub = v.percorso; sfoglia.scelto = null; sfoglia.q = ''; sfoglia.max = 150; return caricaSfoglia(); }
+      if (v.cartella) { sfoglia.sub = v.percorso; sfoglia.scelto = null; sfoglia.q = ''; sfoglia.max = 150; return caricaSfoglia(true); }
       if (sfoglia.sposta) return;
       if (sfoglia.multi) return sfogliaSpunta(i);
       await pw('apriFile', { cartella: sfoglia.cartella, percorso: v.percorso });
@@ -2859,6 +2868,20 @@
     // (la finestra vera è già chiusa, quindi la logica non cambia)
     const scorriFinestre = new WeakMap();
     document.addEventListener('scroll', e => { const t = e.target; if (t && t.nodeType === 1 && t.closest && t.closest('[id^=modal]')) scorriFinestre.set(t, t.scrollTop); }, true);
+    // ----- lavoro pesante dopo la chiusura -----
+    // Quando una finestra comincia a chiudersi, i ridisegni delle liste aspettano i primi fotogrammi dell'animazione (poi la finestra scende da sola): altrimenti la chiusura parte in ritardo e va a scatti.
+    const chiusura = { fino: 0, coda: new Map(), timer: 0 };
+    const chiusuraInCorso = () => performance.now() < chiusura.fino;
+    function svuotaChiusura() { clearTimeout(chiusura.timer); chiusura.fino = 0; const l = [...chiusura.coda.values()]; chiusura.coda.clear(); l.forEach(f => { try { f(); } catch (e) { console.error(e); } }); }
+    function iniziaChiusura() { if (document.documentElement.getAttribute('data-animazioni') === 'no') return; chiusura.fino = performance.now() + 140; clearTimeout(chiusura.timer); chiusura.timer = setTimeout(svuotaChiusura, 150); }
+    (function () {   // si accorge subito (non a lavoro finito) di una finestra che si nasconde
+      const desc = Object.getOwnPropertyDescriptor(Element.prototype, 'classList'); if (!desc || !desc.get) return;
+      const di = new WeakMap(), aggiungi = DOMTokenList.prototype.add;
+      Object.defineProperty(Element.prototype, 'classList', { configurable: true, enumerable: desc.enumerable, get() { const l = desc.get.call(this); if (!di.has(l)) di.set(l, this); return l; } });
+      DOMTokenList.prototype.add = function (...t) { if (t.includes('hidden')) { const el = di.get(this); if (el && el.id && el.id.startsWith('modal')) iniziaChiusura(); } return aggiungi.apply(this, t); };
+    })();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) svuotaChiusura(); });
+    window.addEventListener('pagehide', svuotaChiusura);
     function animaUscita(m) {
       if (!animazioniAttive() || !m.animate || !m.isConnected) return;
       const pannello = m.firstElementChild; if (!pannello) return;
@@ -2981,7 +3004,7 @@
     })();
 
     // ----- Informazioni e licenze -----
-    const VERSIONE_APP = '0.9.6';   // uguale a versionName in android/app/build.gradle
+    const VERSIONE_APP = '0.9.7';   // uguale a versionName in android/app/build.gradle
     // dati dello sviluppatore: si mostrano solo le voci compilate (come in DoctorWood)
     const SVILUPPATORE = { nome: '', ditta: 'CrsLabs', email: 'crslabs.info@gmail.com', telefono: '', sito: '', indirizzo: '', partitaIva: '' };
     const TITOLARE_COPYRIGHT = 'CrsLabs';
@@ -3367,12 +3390,16 @@
       CAP.addListener('BothWise', 'condivisi', () => { conMessaggio(controllaCondivisi)(); });
       CAP.addListener('BothWise', 'inviaRicevi', () => { conMessaggio(controllaInviaRicevi)(); });
     } catch (_) {}
+    // i ridisegni pesanti aspettano le prime immagini della chiusura di una finestra (vedi «lavoro pesante dopo la chiusura»)
+    { const d0 = disegna, r0 = riempiImpostazioni;
+      disegna = function (...a) { if (chiusuraInCorso()) { chiusura.coda.set('disegna', () => d0.apply(this, a)); return; } return d0.apply(this, a); };
+      riempiImpostazioni = function (...a) { if (chiusuraInCorso()) { chiusura.coda.set('riempiImpostazioni', () => r0.apply(this, a)); return; } return r0.apply(this, a); }; }
     applicaTesto();
     disegna();
     avviaBlocco().then(() => { if (!document.documentElement.hasAttribute('data-bloccato') && !aperturaAnimata) { aperturaAnimata = true; animaApertura(); } });
     conMessaggio(avvia)().then(() => conMessaggio(controllaCondivisi)()).then(() => conMessaggio(controllaInviaRicevi)());
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') aggiorna(); });
   })();
-  </script>
+</script>
 </body>
 </html>

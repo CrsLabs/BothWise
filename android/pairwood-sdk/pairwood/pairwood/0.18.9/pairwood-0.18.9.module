@@ -1,0 +1,125 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "pairwood",
+    "module": "pairwood",
+    "version": "0.18.9",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "pairwood",
+          "module": "motore",
+          "version": {
+            "requires": "0.18.9"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "pairwood-0.18.9.aar",
+          "url": "pairwood-0.18.9.aar",
+          "size": 236050,
+          "sha512": "a4676203ff79aaa93ef4c0b98aef9b8e39c84fd693b17a3c04ea5e01ad1302a09cf19411be592c722ebe0159408420e623fd082687abf736a5ace427f11d2068",
+          "sha256": "711418ee9731530c8570ccc702f76cadb546dcadea8f026c217401ed6ed0977e",
+          "sha1": "b1ebc07227cbda250ae59d2f9f89c2d8f1fd928c",
+          "md5": "1bb184a11107cadf75e7f85a9c70f887"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.work",
+          "module": "work-runtime",
+          "version": {
+            "requires": "2.10.0"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-camera2",
+          "version": {
+            "requires": "1.5.3"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-lifecycle",
+          "version": {
+            "requires": "1.5.3"
+          }
+        },
+        {
+          "group": "androidx.camera",
+          "module": "camera-view",
+          "version": {
+            "requires": "1.5.3"
+          }
+        },
+        {
+          "group": "androidx.activity",
+          "module": "activity",
+          "version": {
+            "requires": "1.11.0"
+          }
+        },
+        {
+          "group": "pairwood",
+          "module": "motore",
+          "version": {
+            "requires": "0.18.9"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.0.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "pairwood-0.18.9.aar",
+          "url": "pairwood-0.18.9.aar",
+          "size": 236050,
+          "sha512": "a4676203ff79aaa93ef4c0b98aef9b8e39c84fd693b17a3c04ea5e01ad1302a09cf19411be592c722ebe0159408420e623fd082687abf736a5ace427f11d2068",
+          "sha256": "711418ee9731530c8570ccc702f76cadb546dcadea8f026c217401ed6ed0977e",
+          "sha1": "b1ebc07227cbda250ae59d2f9f89c2d8f1fd928c",
+          "md5": "1bb184a11107cadf75e7f85a9c70f887"
+        }
+      ]
+    }
+  ]
+}

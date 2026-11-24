@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.bothwise.app",
- "versionCode": 40,
- "versione": "0.9.5",
- "apk": "BothWise-0.9.5.apk",
- "sha256": "5cd280cebba3ad8d451c928066e27741facf3f390f26831adc8f169b5718c9fa",
- "novita": "Nell'elenco dei file di una cartella c'è il tasto «Indietro»."
+ "versionCode": 42,
+ "versione": "0.9.7",
+ "apk": "BothWise-0.9.7.apk",
+ "sha256": "c38a110117d4e5ea83122d646982b56778c05a3d73338c3c14ca1d1e674d7ae8",
+ "novita": "Cartelle con molti file molto più veloci da sfogliare, con ricerca e ordine; finestre che si chiudono senza scatti."
 }
