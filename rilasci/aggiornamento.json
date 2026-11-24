@@ -1,8 +1,8 @@
 {
  "pacchetto": "it.bothwise.app",
- "versionCode": 39,
- "versione": "0.9.4",
- "apk": "BothWise-0.9.4.apk",
- "sha256": "6a8cb86bc76e46470d42f97cf1806a9553c07f5cbeb87045abbf8ecb43c5e006",
- "novita": "Fuori dalla Wi‑Fi lo stato dice «sincronizzato tramite Google Drive» (o Dropbox) invece di «Nessuno raggiungibile»."
+ "versionCode": 40,
+ "versione": "0.9.5",
+ "apk": "BothWise-0.9.5.apk",
+ "sha256": "5cd280cebba3ad8d451c928066e27741facf3f390f26831adc8f169b5718c9fa",
+ "novita": "Nell'elenco dei file di una cartella c'è il tasto «Indietro»."
 }
