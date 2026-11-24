@@ -37,6 +37,7 @@ Cestino, versioni, conferma delle cancellazioni, cancellare ogni traccia => Bin,
 Chiaro => Light
 Chiedi prima di cancellare => Ask before deleting
 Chiudi => Close
+Indietro => Back
 Componenti di terzi e licenze (6) => Third-party components and licences (6)
 Con «Sempre raggiungibile» questo dispositivo riceve anche a schermo spento, nell'orario scelto (notifica fissa di Android). Utile per il dispositivo che resta acceso, per esempio un tablet. => With “Always reachable” this device also receives with the screen off, during the chosen hours (a permanent Android notification). Useful for a device that stays on, such as a tablet.
 Conserva le versioni precedenti => Keep previous versions

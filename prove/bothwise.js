@@ -633,6 +633,15 @@ async function nat(d, pl, m, o) {
     esito('entra nella cartella: briciole e contenuto', /Tutta la cartella/.test(t) && /lavori/.test(t) && /a\.jpg/.test(t));
     // il gesto Indietro sale di un livello (non chiude tutto)
     esito('Indietro dentro una cartella: torna alla cartella sopra', await B.evaluate(() => window.__indietro()) === true && (await B.waitForTimeout(500), /note\.txt/.test(await B.locator('#listaCorpo').textContent())) && !/Tutta la cartella › /.test(await B.locator('#listaCorpo').textContent()) && await B.locator('#modalLista.hidden').count() === 0);
+    // il tasto «Indietro» visibile (per chi non ha il gesto o non sa che c'è)
+    esito('«Indietro» si vede, ben leggibile, nell\'elenco dei file', await B.locator('#listaIndietro').isVisible() && /Indietro/.test(await B.locator('#listaIndietro').textContent()));
+    await tocca(B, '#listaCorpo [data-az="sfogliaApri"]', 600);
+    esito('dentro la sottocartella le briciole sono due', await B.locator('#listaCorpo [data-az="sfogliaVai"]').count() === 2);
+    await tocca(B, '#listaIndietro', 600);
+    esito('il tasto «Indietro» sale di un livello', await B.locator('#listaCorpo [data-az="sfogliaVai"]').count() === 1 && /note\.txt/.test(await B.locator('#listaCorpo').textContent()));
+    await tocca(B, '#listaIndietro', 600);
+    esito('alla radice «Indietro» torna alla scheda della cartella', await B.locator('#listaCorpo, #listaPiede').locator('[data-az="apriSfoglia"]').count() >= 1 && !(await B.locator('#listaIndietro').isVisible()), JSON.stringify({ n: await B.locator('#listaCorpo, #listaPiede').locator('[data-az="apriSfoglia"]').count(), vis: await B.locator('#listaIndietro').isVisible(), titolo: await B.locator('#listaTitolo').textContent() }));
+    await tocca(B, '[data-az="apriSfoglia"]', 700);
     await tocca(B, '#listaCorpo [data-az="sfogliaApri"]', 600);
     esito('senza selezione: «Aggiungi file qui» e «Nuova sottocartella»', await B.locator('#listaPiede [data-az="sfogliaAggiungi"]').count() === 1 && await B.locator('#listaPiede [data-az="sfogliaNuova"]').count() === 1);
     // azioni su un file (a.jpg è il secondo: prima la cartella «lavori»)

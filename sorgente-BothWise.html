@@ -359,7 +359,7 @@
   <!-- elenco a tutta altezza: cestino e cancellazioni da confermare -->
   <div id="modalLista" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="listaTitolo" style="z-index:60">
     <div class="bg-slate-800 border border-slate-700 rounded-xl max-w-md w-full p-4 space-y-3 overflow-y-auto" style="max-height:92vh;max-height:92dvh">
-      <div class="flex items-center justify-between gap-2"><h3 id="listaTitolo" class="text-base font-bold text-amber-500"></h3>
+      <div class="flex items-center justify-between gap-2"><button type="button" id="listaIndietro" data-az="indietroLista" class="hidden bw-tasto secondario" aria-label="Indietro" style="min-height:44px"><i class="fa-solid fa-chevron-left"></i>Indietro</button><h3 id="listaTitolo" class="text-base font-bold text-amber-500 flex-1 min-w-0"></h3>
         <button type="button" data-az="chiudiLista" aria-label="Chiudi" class="text-slate-400 flex items-center justify-center flex-shrink-0" style="width:44px;height:44px"><i class="fa-solid fa-xmark"></i></button></div>
       <p id="listaTesto" class="text-xs text-slate-300"></p>
       <div id="listaCorpo" class="space-y-2"></div>
@@ -773,6 +773,7 @@
   "In pausa finché non la riprendi.": "Paused until you resume it.",
   "In pausa fino a §.": "Paused until §.",
   "In rete locale BothWise si sincronizza solo in queste Wi‑Fi (fuori, se collegato, usa Google Drive o Dropbox).": "On the local network BothWise syncs only on these Wi‑Fi networks (away from them, if connected, it uses Google Drive or Dropbox).",
+  "Indietro": "Back",
   "Indirizzo non ammesso": "Address not allowed",
   "Informazioni e licenze": "Information and licences",
   "Ingrandisce le scritte di tutta l'app, solo su questo dispositivo.": "Enlarges the text across the whole app, on this device only.",
@@ -1793,7 +1794,19 @@
       $('listaTesto').style.whiteSpace = '';
       $('listaTitolo').textContent = titolo; $('listaTesto').textContent = testo;
       $('listaCorpo').innerHTML = corpo; $('listaPiede').innerHTML = piede;
+      $('listaIndietro').classList.toggle('hidden', !(lista && lista.tipo === 'sfoglia'));
       $('modalLista').classList.remove('hidden');
+    }
+    // un passo indietro: nelle cartelle dei file sale di un livello (alla radice torna alla scheda della cartella); chiude prima le modalità «Sposta» e «Seleziona»
+    function indietroLista() {
+      if (!lista) return;
+      if (lista.tipo === 'sfoglia' && sfoglia) {
+        if (sfoglia.sposta) return sfogliaAnnullaSposta();
+        if (sfoglia.multi) return sfogliaFine();
+        if (sfoglia.sub) { sfoglia.sub = sfoglia.sub.includes('/') ? sfoglia.sub.slice(0, sfoglia.sub.lastIndexOf('/')) : ''; sfoglia.scelto = null; return caricaSfoglia(); }
+        const id = sfoglia.cartella; sfoglia = null; return apriCartella(id);
+      }
+      chiudiLista();
     }
     function chiudiLista() { $('modalLista').classList.add('hidden'); $('listaTesto').style.whiteSpace = ''; lista = null; voci = []; }
     const altri = n => n > MAX_RIGHE ? `<p class="text-[11px] text-slate-400 text-center">… e altri ${n - MAX_RIGHE} file</p>` : '';
@@ -3122,7 +3135,7 @@
       accettaOfferta: conMessaggio(accettaOfferta), rifiutaOfferta: conMessaggio(rifiutaOfferta),
       sbloccaApp: conMessaggio(sbloccaApp), bloccoApp: conMessaggio(bloccoApp), abbina: conMessaggio(abbina), abbinaMostra: conMessaggio(abbinaMostra), abbinaInquadra: conMessaggio(abbinaInquadra), abbinaScrivi: conMessaggio(abbinaScrivi), apriDispositivo: conMessaggio(apriDispositivo), cambiaNome: conMessaggio(cambiaNome),
       ascoltoContinuo: conMessaggio(ascoltoContinuo), cancellaTutto: conMessaggio(cancellaTutto),
-      apriCestino: conMessaggio(apriCestino), chiudiLista, apriCartella, ripristina: conMessaggio(ripristina), eliminaDalCestino: conMessaggio(eliminaDalCestino),
+      apriCestino: conMessaggio(apriCestino), chiudiLista, indietroLista, apriCartella, ripristina: conMessaggio(ripristina), eliminaDalCestino: conMessaggio(eliminaDalCestino),
       svuotaCestino: conMessaggio(svuotaCestino), apriAttesa, tieniFile: conMessaggio(tieniFile), togliFile: conMessaggio(togliFile),
       scegliModo: conMessaggio(scegliModo), ricezioneFile: conMessaggio(ricezioneFile), aggiungiTile: conMessaggio(aggiungiTile), ricezioneInviaRicevi: conMessaggio(ricezioneInviaRicevi), apriSfoglia: conMessaggio(apriSfoglia),
       sfogliaVai: conMessaggio(sfogliaVai), sfogliaMulti, sfogliaFine, sfogliaSpunta, sfogliaTutti, sfogliaAzioneMulti: conMessaggio(sfogliaAzioneMulti), sfogliaApri: conMessaggio(sfogliaApri), sfogliaScegli, sfogliaAzione: conMessaggio(sfogliaAzione), sfogliaSpostaQui: conMessaggio(sfogliaSpostaQui),
@@ -3154,12 +3167,7 @@
       if ($('bloccoApp').style.display === 'flex') return false;   // bloccata: Indietro manda l'app in secondo piano
       if (!$('modalFinestra').classList.contains('hidden')) { $('finNo').classList.contains('hidden') ? $('finSi').click() : $('finNo').click(); return true; }
       if (!$('modalLista').classList.contains('hidden')) {
-        if (lista && lista.tipo === 'sfoglia' && sfoglia) {   // Indietro = un passo indietro, non fuori da tutto
-          if (sfoglia.sposta) { sfogliaAnnullaSposta(); return true; }
-          if (sfoglia.multi) { sfogliaFine(); return true; }
-          if (sfoglia.sub) { sfoglia.sub = sfoglia.sub.includes('/') ? sfoglia.sub.slice(0, sfoglia.sub.lastIndexOf('/')) : ''; sfoglia.scelto = null; caricaSfoglia(); return true; }
-        }
-        chiudiLista(); return true;
+        indietroLista(); return true;   // Indietro = un passo indietro, non fuori da tutto
       }
       if (!$('modalInfo').classList.contains('hidden')) { chiudiInfo(); return true; }
       if (!$('modalSegnala').classList.contains('hidden')) { chiudiSegnala(); return true; }
