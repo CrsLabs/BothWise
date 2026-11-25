@@ -10,6 +10,7 @@ const MOCK = `(() => { window.__ascolto = []; window.__nativo = [];
   window.__evento = e => __ascolto.forEach(f => { try { f(e); } catch (_) {} });
   // per estrarre tutti i testi mostrati (solo con HARVEST=1): serve a controllare che l'inglese li copra
   window.__testi = new Set(); window.__nonTradotti = new Set();
+  try { if (!sessionStorage.getItem('__baseVera')) localStorage.setItem('bothwise_base_chiesta', 'true'); } catch (_) {}
   if ('${process.env.LINGUA || ''}' === 'en') { try { localStorage.setItem('bothwise_lingua', JSON.stringify('en')); } catch (_) {} }
   const att = n => n.nodeType === 1 && ['aria-label', 'title', 'placeholder', 'alt'].forEach(a => { const v = n.getAttribute(a); if (v && v.trim()) __testi.add(v.trim()); });
   const scan = n => { if (n.nodeType === 3) { const t = n.data.trim(); if (t) __testi.add(t); } else if (n.nodeType === 1 && n.tagName !== 'SCRIPT' && n.tagName !== 'STYLE') { att(n); n.childNodes.forEach(scan); n.querySelectorAll && n.querySelectorAll('[aria-label],[title],[placeholder],[alt]').forEach(att); } };
@@ -72,6 +73,7 @@ async function nat(d, pl, m, o) {
     case 'controllaImporta': return { v: { presenti: d.presentiImporta || [] } };
     case 'importa': (d.importati = d.importati || []).push(o); return { v: { percorsi: o.uris.map((u, i) => o.sottocartella + '/file' + i), rinominati: d.rinominatiImporta || [] } };
     case 'rilasciaCartellaUtente': return { v: {} };
+    case 'sottocartella': (d.sottocartelle = d.sottocartelle || []).push(o); return { v: { uri: o.uri + '/' + o.nome, nome: o.nome } };
     case 'nuovoCodice': return { v: { codice: 'ABCDEFGHJKMNPQRSTVWX' } };
     case 'accettaAbbinamento': d.accetta = o.codice; return { v: {} };
     case 'abbina': {
@@ -200,7 +202,7 @@ async function nat(d, pl, m, o) {
   await passo('Cartella aggiunta su A, proposta e accettata su B', async () => {
     disp.A.scelte.push({ uri: 'content://a/Documenti', nome: 'Documenti' });
     await tocca(A, '[data-az="aggiungiCartella"]', 400);
-    esito('«Aggiungi cartella» propone le cartelle pronte', await A.locator('#listaCorpo [data-az="cartellaPronta"]').count() === 4 && /Foto della fotocamera/.test(await A.locator('#listaCorpo').textContent()));
+    esito('«Aggiungi cartella» propone le cartelle pronte', await A.locator('#listaCorpo [data-az="cartellaPronta"]').count() === 5 && /Foto della fotocamera/.test(await A.locator('#listaCorpo').textContent()));
     await tocca(A, '[data-az="cartellaPronta"][data-arg="altra"]', 400); await fin(A);
     esito('propone il nome della cartella', (await A.locator('#finCampo').inputValue()) === 'Documenti');
     await A.locator('#finCampo').fill('Documenti ufficio'); await tocca(A, '#finSi', 800);
@@ -214,11 +216,43 @@ async function nat(d, pl, m, o) {
     disp.B.scelte.push({ uri: 'content://b/Doc', nome: 'Doc' });
     await tocca(B, '[data-az="accettaOfferta"]'); await fin(B);
     esito('spiega che i file si uniscono senza perdite', /niente si perde/.test(await B.locator('#finTesto').textContent()));
-    await tocca(B, '#finSi', 900);
+    esito('propone per prima la cartella BothWise', /Mettila in BothWise/.test(await B.locator('#finSi').textContent()) && /Scegli un'altra cartella/.test(await B.locator('#finAlt').textContent()));
+    await tocca(B, '#finAlt', 900);
     const cb = disp.B.conf.cartelle.find(c => typeof c === 'object');
     esito('B: stessa cartella (stesso id), nella posizione scelta', cb && cb.id === ca.id && cb.uri === 'content://b/Doc' && cb.nome === 'Documenti ufficio');
     await B.waitForTimeout(400); await B.evaluate(() => document.dispatchEvent(new Event('visibilitychange'))); await B.waitForTimeout(400);
     esito('B: proposta sparita, cartella con i suoi 2 file', !(await B.locator('#offerte').textContent()).trim() && /2 file/.test(await B.locator('#cartelle').textContent()), await B.locator('#cartelle').textContent());
+  });
+
+  await passo('La cartella BothWise: nuova cartella e proposta salvata lì dentro', async () => {
+    const prima = disp.A.conf.cartelle.length;
+    disp.A.scelte.push({ uri: 'content://a/tree/Documents', nome: 'Documents', percorso: 'Documents' });
+    await tocca(A, '[data-az="aggiungiCartella"]', 400);
+    esito('«Nuova cartella in BothWise» è la prima scelta', (await A.locator('#listaCorpo [data-az="cartellaPronta"]').first().getAttribute('data-arg')) === 'nuova');
+    await tocca(A, '[data-az="cartellaPronta"][data-arg="nuova"]', 400); await fin(A);
+    esito('spiega la cartella BothWise in Documenti', /BothWise/.test(await A.locator('#finTitolo').textContent()) && /Documents/.test(await A.locator('#finTesto').textContent()));
+    await tocca(A, '#finSi', 600); await fin(A);
+    esito('il selettore si apre su «Documents»', disp.A.iniziale === 'Documents');
+    esito('crea «BothWise» dentro Documenti', (disp.A.sottocartelle || []).some(x => x.uri === 'content://a/tree/Documents' && x.nome === 'BothWise'));
+    await A.locator('#finCampo').fill('Lavori 2026'); await tocca(A, '#finSi', 900);
+    const n = disp.A.conf.cartelle.filter(c => typeof c === 'object');
+    const nuova = n.find(c => c.nome === 'Lavori 2026');
+    esito('la cartella nuova è dentro BothWise', n.length === prima + 1 && nuova && nuova.uri === 'content://a/tree/Documents/BothWise/Lavori 2026', JSON.stringify(nuova));
+    esito('la cartella BothWise è ricordata', await A.evaluate(() => (JSON.parse(localStorage.getItem('bothwise_conf')).base || {}).uri) === 'content://a/tree/Documents/BothWise');
+    // una seconda cartella: niente più permessi da chiedere
+    await tocca(A, '[data-az="aggiungiCartella"]', 400); await tocca(A, '[data-az="cartellaPronta"][data-arg="nuova"]', 400); await fin(A);
+    esito('la seconda volta chiede solo il nome', /Nuova cartella in BothWise/.test(await A.locator('#finTitolo').textContent()));
+    await A.locator('#finCampo').fill('Lavori 2026'); await tocca(A, '#finSi', 900);
+    esito('lo stesso nome già sincronizzato diventa «Lavori 2026 (2)»', disp.A.conf.cartelle.some(c => typeof c === 'object' && c.uri === 'content://a/tree/Documents/BothWise/Lavori 2026 (2)'));
+    // su B la proposta si salva in BothWise con un tocco (B prepara la sua cartella BothWise)
+    await tocca(A, '#sincBtn', 800); await B.waitForTimeout(500);
+    disp.B.scelte.push({ uri: 'content://b/tree/Documents', nome: 'Documents', percorso: 'Documents' });
+    await tocca(B, '[data-az="accettaOfferta"]', 400); await fin(B);
+    await tocca(B, '#finSi', 600); await fin(B);
+    esito('B: chiede di preparare la cartella BothWise', /BothWise/.test(await B.locator('#finTitolo').textContent()));
+    await tocca(B, '#finSi', 1200);
+    const cb = disp.B.conf.cartelle.find(c => typeof c === 'object' && c.nome === 'Lavori 2026');
+    esito('B: «Lavori 2026» salvata in Documenti/BothWise con lo stesso id', cb && cb.id === nuova.id && cb.uri === 'content://b/tree/Documents/BothWise/Lavori 2026', JSON.stringify(cb));
   });
 
   await passo('Rifiutare una proposta', async () => {
@@ -226,15 +260,18 @@ async function nat(d, pl, m, o) {
     await tocca(A, '[data-az="aggiungiCartella"]', 400); await tocca(A, '[data-az="cartellaPronta"][data-arg="altra"]', 400); await fin(A); await tocca(A, '#finSi', 800);
     await tocca(A, '#sincBtn', 800); await B.waitForTimeout(400);
     esito('B: «Foto» proposta', /«Foto»/.test(await B.locator('#offerte').textContent()));
-    await tocca(B, '[data-az="rifiutaOfferta"]', 500);
-    esito('B: rifiutata e non più proposta', !(await B.locator('#offerte').textContent()).trim());
+    await B.locator('#offerte .bw-offerta', { hasText: '«Foto»' }).locator('[data-az="rifiutaOfferta"]').click(); await B.waitForTimeout(500);
+    esito('B: rifiutata e non più proposta', !/«Foto»/.test(await B.locator('#offerte').textContent()));
+    // le altre proposte ancora aperte si rifiutano, così le prove dopo partono pulite
+    while (await B.locator('[data-az="rifiutaOfferta"]').count()) { await B.locator('[data-az="rifiutaOfferta"]').first().click(); await B.waitForTimeout(400); }
   });
 
   await passo('Smettere di sincronizzare una cartella', async () => {
+    const primaN = disp.A.conf.cartelle.filter(c => typeof c === 'object').length;
     await tocca(A, '[data-az="apriCartella"]'); await tocca(A, '[data-az="smettiCartella"]'); await fin(A);
     esito('spiega che i file restano', /restano su questo dispositivo/.test(await A.locator('#finTesto').textContent()));
     await tocca(A, '#finSi', 800);
-    esito('cartella tolta e permesso restituito', disp.A.conf.cartelle.filter(c => typeof c === 'object').length === 1 && disp.A.chiamate.includes('PairWood.rilasciaCartellaUtente'));
+    esito('cartella tolta e permesso restituito', disp.A.conf.cartelle.filter(c => typeof c === 'object').length === primaN - 1 && disp.A.chiamate.includes('PairWood.rilasciaCartellaUtente'));
   });
 
   await passo('Cestino: vedere, ripristinare, eliminare, svuotare', async () => {

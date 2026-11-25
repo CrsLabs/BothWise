@@ -934,3 +934,22 @@ Il file non è firmato da CrsLabs => The file is not signed by CrsLabs
 Gli altri tuoi dispositivi lo dimenticano da soli: al primo incontro nella stessa Wi‑Fi o al loro prossimo scambio attraverso Google Drive o Dropbox.\n\nSe è stato perso o rubato, fai anche queste due cose (da un computer o da un altro telefono):\n1. Togligli il tuo account Google: myaccount.google.com → Sicurezza → I tuoi dispositivi → scegli quel dispositivo → Esci. Oppure cambia la password di Google. Se usi Dropbox: dropbox.com → Impostazioni → Sicurezza → Dispositivi → Scollega.\n2. Bloccalo o cancellalo a distanza: google.com/android/find («Trova il mio dispositivo»). => Your other devices will forget it on their own: at their first meeting on the same Wi‑Fi or at their next exchange through Google Drive or Dropbox.\n\nIf it was lost or stolen, also do these two things (from a computer or another phone):\n#. Remove your Google account from it: myaccount.google.com → Security → Your devices → choose that device → Sign out. Or change your Google password. If you use Dropbox: dropbox.com → Settings → Security → Devices → Unlink.\n#. Lock or erase it remotely: google.com/android/find («@»).Ora: sempre raggiungibile ¤ #:#–#:#. => Now: always reachable ¤ #:#–#:#.
 un tuo dispositivo => one of your devices
 Per sicurezza i programmi non si aprono da qui. => For safety, programs can't be opened from here.
+
+# ---------- la cartella «BothWise» (25/11) ----------
+La cartella BothWise => The BothWise folder
+Per cominciare preparo una cartella «@» dentro «@»: lì dentro metterò le cartelle da tenere uguali, così sono tutte in un posto solo e le ritrovi subito.\n\nSi apre «@»: controlla che in alto ci sia «@», poi tocca «@» e «@». Android lo chiede una volta sola. => To begin, I'll prepare a «@» folder inside «@»: the folders you keep in sync go in there, all in one place and easy to find.\n\n«@» opens: check that «@» is shown at the top, then tap «@» and «@». Android asks only once.
+Le cartelle nuove vanno dentro la cartella «@», in «@».\n\nSi apre «@»: controlla che in alto ci sia «@», poi tocca «@» e «@». Android lo chiede una volta sola. => New folders go inside the «@» folder, in «@».\n\n«@» opens: check that «@» is shown at the top, then tap «@» and «@». Android asks only once.
+@ Documenti => Documents
+Prepara la cartella => Prepare the folder
+Cartella «@» pronta in «@». => «@» folder ready in «@».
+Cartella «@» pronta. => «@» folder ready.
+Nuova cartella in BothWise => New folder in BothWise
+Come si chiama? Con questo nome la vedranno anche gli altri dispositivi. => What is it called? Your other devices will see it with this name.
+Crea => Create
+Non riesco più a scrivere nella cartella BothWise: preparala di nuovo. => I can no longer write to the BothWise folder: prepare it again.
+Mettila in BothWise => Put it in BothWise
+Scegli un'altra cartella => Choose another folder
+La metto nella cartella «@», con il suo nome: è la scelta più semplice. Se preferisci, scegli tu una cartella di questo dispositivo: se contiene già dei file vengono uniti a quelli dell'altro dispositivo, e niente si perde. => I'll put it in the «@» folder, with its own name: the simplest choice. If you prefer, choose a folder on this device: if it already has files they are merged with the other device's, and nothing is lost.
+Documenti/BothWise/… · invia e ricevi · la più semplice => Documents/BothWise/… · send and receive · the simplest
+Una cartella che hai già => A folder you already have
+La più semplice: una cartella nuova dentro «@». Vanno bene anche le foto della fotocamera o i documenti. Basta farlo su un dispositivo: sull'altro arriva la proposta. => The simplest: a new folder inside «@». Camera photos or documents work too. Do it on one device: the other gets the offer.
