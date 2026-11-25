@@ -41,7 +41,8 @@ Made for non‑technical people: few clear choices, plain language, and one rule
 - A lost device is **forgotten** from just one of yours: the others learn it at the first meeting.
 
 ### Choosing what to sync
-- Phone folders chosen with the Android picker, with no «everything» permissions.
+- **Automatic «BothWise» folder** in the phone's storage, created at first start: its subfolders are your synced folders. For this, Android asks once for «All files access», and BothWise uses it **only inside that folder**. If you refuse, nothing breaks: you choose folders with the Android picker.
+- Any other phone folder can still be chosen with the Android picker.
 - **Ready‑made folders** in one tap: *Camera photos*, *Documents*, *Download*.
 - **Share with BothWise** from the Android menu: the file goes into the «Shared» folder.
 - Three modes per folder: **send and receive**, **send only**, **receive only**.
@@ -76,7 +77,7 @@ Made for non‑technical people: few clear choices, plain language, and one rule
 - Notifications only when a decision of yours is needed.
 
 ### Away from Wi‑Fi
-An encrypted «mailbox» on **your** Google Drive or Dropbox, to sync even when the devices aren't close. The service sees only encrypted data, with no names or contents; on Google Drive BothWise requests only the `drive.file` permission (it sees only the files it creates).
+An encrypted «mailbox» on **your** Google Drive or Dropbox, to sync even when the devices aren't close (phones and the Windows program alike). The service sees only encrypted data, with no names or contents; on Google Drive BothWise requests only the `drive.file` permission (it sees only the files it creates).
 
 ### Security and privacy
 - Devices recognised by **cryptographic identity**, **TLS 1.3** connection, files and names encrypted with **AES‑256‑GCM**.

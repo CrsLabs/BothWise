@@ -23,7 +23,7 @@ BothWise is built to **collect no data**: no accounts of its own, no ads, no ana
 - **Support BothWise**: opens Ko-fi in the browser only when tapped.
 
 ## Android permissions
-Network and Wi‑Fi (paired devices), location only to read the Wi‑Fi name if you choose trusted networks (BothWise doesn't read or store your location), camera (pairing QR), notifications and foreground service (staying reachable during the hours you choose), fingerprint/PIN (optional lock), install apps (updates, always confirmed by Android). Folder access is only what you grant, folder by folder.
+Network and Wi‑Fi (paired devices), location only to read the Wi‑Fi name if you choose trusted networks (BothWise doesn't read or store your location), camera (pairing QR), notifications and foreground service (staying reachable during the hours you choose), fingerprint/PIN (optional lock), install apps (updates, always confirmed by Android). Folder access is only what you grant, folder by folder. In addition, "All files access" (MANAGE_EXTERNAL_STORAGE) is requested once, only to create and use the automatic **BothWise** folder in the phone's storage: the app reads and writes only inside that folder, never elsewhere, and you can refuse it and keep choosing folders with the Android picker.
 
 ## Deleting your data
 Settings → Security and data → «Erase everything from this device» removes pairings, keys, settings and Drive or Dropbox connections; your folders and files stay where they are. Or uninstall the app.
