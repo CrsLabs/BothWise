@@ -73,6 +73,9 @@ async function nat(d, pl, m, o) {
     case 'controllaImporta': return { v: { presenti: d.presentiImporta || [] } };
     case 'importa': (d.importati = d.importati || []).push(o); return { v: { percorsi: o.uris.map((u, i) => o.sottocartella + '/file' + i), rinominati: d.rinominatiImporta || [] } };
     case 'rilasciaCartellaUtente': return { v: {} };
+    case 'accessoFile': return { v: { possibile: !!d.accessoPossibile, concesso: !!d.accessoConcesso } };
+    case 'chiediAccessoFile': d.chiestoAccesso = (d.chiestoAccesso || 0) + 1; d.accessoConcesso = d.concedeAccesso !== false; return { v: { concesso: d.accessoConcesso } };
+    case 'baseFile': return { v: { uri: 'file:///storage/emulated/0/' + o.nome, dove: o.nome } };
     case 'sottocartella': (d.sottocartelle = d.sottocartelle || []).push(o); return { v: { uri: o.uri + '/' + o.nome, nome: o.nome } };
     case 'nuovoCodice': return { v: { codice: 'ABCDEFGHJKMNPQRSTVWX' } };
     case 'accettaAbbinamento': d.accetta = o.codice; return { v: {} };
@@ -247,15 +250,16 @@ async function nat(d, pl, m, o) {
     esito('lo stesso nome già sincronizzato diventa «Lavori 2026 (2)»', disp.A.conf.cartelle.some(c => typeof c === 'object' && c.uri === 'content://a/tree/Download/BothWise/Lavori 2026 (2)'));
     // su B la proposta si salva in BothWise con un tocco (B prepara la sua cartella BothWise)
     await tocca(A, '#sincBtn', 800); await B.waitForTimeout(500);
-    disp.B.scelte.push({ uri: 'content://b/tree/BothWise', nome: 'BothWise', percorso: 'BothWise' });
+    disp.B.accessoPossibile = true; const sceltePrima = disp.B.chiamate.filter(x => x === 'PairWood.scegliCartellaUtente').length;
     await tocca(B, '[data-az="accettaOfferta"]', 400); await fin(B);
     await tocca(B, '#finSi', 600); await fin(B);
-    esito('B: chiede di preparare la cartella BothWise', /BothWise/.test(await B.locator('#finTitolo').textContent()));
+    esito('B (Android 11+): chiede solo di attivare il permesso, una volta', /BothWise/.test(await B.locator('#finTitolo').textContent()) && /Accesso a tutti i file/.test(await B.locator('#finTesto').textContent()));
     await tocca(B, '#finSi', 1200);
+    esito('B: il permesso si chiede una sola volta e la cartella si crea da sola (niente «Scegli cartella»)', disp.B.chiestoAccesso === 1 && disp.B.chiamate.filter(x => x === 'PairWood.scegliCartellaUtente').length === sceltePrima);
     const cb = disp.B.conf.cartelle.find(c => typeof c === 'object' && c.nome === 'Lavori 2026');
-    esito('B: scelta direttamente la cartella BothWise, nessuna cartella in più', !(disp.B.sottocartelle || []).some(x => x.nome === 'BothWise'));
+    esito('B: la cartella BothWise è nella memoria del telefono', await B.evaluate(() => (JSON.parse(localStorage.getItem('bothwise_conf')).base || {}).uri) === 'file:///storage/emulated/0/BothWise');
     esito('B: la cartella BothWise compare in cima all\'elenco', /Cartella BothWise/.test(await B.locator('#cartelle').textContent()) && /BothWise/.test(await B.locator('#cartelle .bw-base').textContent()));
-    esito('B: «Lavori 2026» salvata in BothWise con lo stesso id', cb && cb.id === nuova.id && cb.uri === 'content://b/tree/BothWise/Lavori 2026', JSON.stringify(cb));
+    esito('B: «Lavori 2026» salvata in BothWise con lo stesso id', cb && cb.id === nuova.id && cb.uri === 'file:///storage/emulated/0/BothWise/Lavori 2026', JSON.stringify(cb));
   });
 
   await passo('Rifiutare una proposta', async () => {

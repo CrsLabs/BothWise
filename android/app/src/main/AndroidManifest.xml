@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="false"
@@ -66,6 +67,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- aggiornamenti dell'app da GitHub: Android chiede comunque la conferma a ogni installazione -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- la cartella «BothWise» nella memoria del telefono: l'app la crea e la usa da sola (Android 11+ chiede di attivare
+         «Accesso a tutti i file» una volta sola). BothWise legge e scrive solo dentro quella cartella. -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <!-- vibrazione di conferma (come DoctorWood) -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- solo per «Reti Wi‑Fi di fiducia»: Android dice il nome della Wi‑Fi solo con questo permesso (chiesto quando serve) -->
