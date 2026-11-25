@@ -953,3 +953,14 @@ La metto nella cartella «@», con il suo nome: è la scelta più semplice. Se p
 Documenti/BothWise/… · invia e ricevi · la più semplice => Documents/BothWise/… · send and receive · the simplest
 Una cartella che hai già => A folder you already have
 La più semplice: una cartella nuova dentro «@». Vanno bene anche le foto della fotocamera o i documenti. Basta farlo su un dispositivo: sull'altro arriva la proposta. => The simplest: a new folder inside «@». Camera photos or documents work too. Do it on one device: the other gets the offer.
+
+# ---------- cartella BothWise nella memoria del telefono (25/11 sera) ----------
+Per cominciare prepariamo la cartella «@» nella memoria del telefono: lì dentro vanno le cartelle da tenere uguali, così sono tutte in un posto solo e le ritrovi subito.\n\nSi apre la memoria del telefono: tocca ⋮ (in alto a destra) e «@», chiamala «@» e tocca «@». Poi tocca «@» e «@». Se la cartella BothWise c'è già, aprila e tocca «@». Android lo chiede una volta sola. => To begin, let's prepare the «@» folder in the phone's storage: the folders you keep in sync go in there, all in one place and easy to find.\n\nThe phone's storage opens: tap ⋮ (top right) and «@», name it «@» and tap «@». Then tap «@» and «@». If the BothWise folder already exists, open it and tap «@». Android asks only once.
+Le cartelle nuove vanno dentro la cartella «@», nella memoria del telefono.\n\nSi apre la memoria del telefono: tocca ⋮ (in alto a destra) e «@», chiamala «@» e tocca «@». Poi tocca «@» e «@». Se la cartella BothWise c'è già, aprila e tocca «@». Android lo chiede una volta sola. => New folders go inside the «@» folder, in the phone's storage.\n\nThe phone's storage opens: tap ⋮ (top right) and «@», name it «@» and tap «@». Then tap «@» and «@». If the BothWise folder already exists, open it and tap «@». Android asks only once.
+@ Nuova cartella => New folder
+Cartella «@» pronta: «@». => «@» folder ready: «@».
+Cartella BothWise => BothWise folder
+Qui dentro vanno le cartelle nuove. => New folders go in here.
+Non ancora preparata: lì dentro vanno le cartelle da tenere uguali. => Not prepared yet: the folders you keep in sync go in there.
+Prepara => Prepare
+Nuova => New

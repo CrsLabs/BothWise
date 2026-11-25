@@ -85,3 +85,6 @@ html[data-tema="chiaro"] .bw-passo.fatto p { color: #64748b; }
 
 html.tema-istantaneo, html.tema-istantaneo *, html.tema-istantaneo *::before, html.tema-istantaneo *::after { transition: none !important; }   /* cambio di tema: tutti i colori nello stesso istante, niente scatti */
 .bw-tasto.hidden { display: none; }   /* il tasto «Indietro» dell'elenco si nasconde davvero (altrimenti vince la regola del tasto) */
+/* la cartella BothWise in cima all'elenco delle cartelle: la «casa» delle cartelle sincronizzate */
+.bw-base { width: 100%; min-height: 60px; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: rgb(14 165 233 / 0.10); border: 1px dashed rgb(56 189 248 / 0.6); margin-bottom: 8px; }
+html[data-tema="chiaro"] .bw-base { background: #e0f2fe; border-color: #38bdf8; }
