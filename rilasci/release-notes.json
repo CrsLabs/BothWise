@@ -1,4 +1,5 @@
 {
+ "v0.9.11": "Automatic «BothWise» folder in the phone's storage (the «All files access» permission is used only inside it; you can refuse it and use the Android picker), folder panel in tabs, device names kept up to date, faster browsing, and stronger safety checks.",
  "v0.9.7": "Folders with many files are much faster to browse, with search, sorting (name, most recent, largest) and «Show more». The large-files notice can be closed and disappears when you remove the limit. Windows and menus close smoothly.",
  "v0.9.5": "The folder file list now has a visible «Back» button: it goes up one level and, from the top folder, returns to the folder card. The phone's Back button does the same.",
  "v0.9.4": "Away from Wi‑Fi, the status under the device name now says «synced through Google Drive» (or Dropbox) with the time and a green dot, instead of «Nobody reachable».",
