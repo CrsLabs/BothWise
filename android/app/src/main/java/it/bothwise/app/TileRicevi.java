@@ -42,10 +42,12 @@ public class TileRicevi extends TileService {
         Tile t = getQsTile();
         if (t == null) return;
         kotlin.Pair<String, Long> r = AscoltoContinuo.ricezione(this);
-        t.setLabel("Invia e ricevi");
+        pairwood.sdk.LinguaPairWood.carica(this);
+        boolean en = pairwood.sdk.LinguaPairWood.inglese();
+        t.setLabel(en ? "Send and receive" : "Invia e ricevi");
         t.setIcon(Icon.createWithResource(this, R.drawable.ic_tile_ricevi));
         t.setState(r != null ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        t.setSubtitle(r != null ? "Fino alle " + DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date(r.getSecond())) : "Spento");
+        t.setSubtitle(r != null ? (en ? "Until " : "Fino alle ") + DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date(r.getSecond())) : (en ? "Off" : "Spento"));
         t.updateTile();
     }
 }

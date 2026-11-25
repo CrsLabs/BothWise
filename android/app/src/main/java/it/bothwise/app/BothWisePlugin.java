@@ -77,7 +77,8 @@ public class BothWisePlugin extends Plugin {
     public void aggiungiTile(PluginCall call) {
         if (android.os.Build.VERSION.SDK_INT < 33) { call.resolve(new com.getcapacitor.JSObject().put("manuale", true)); return; }
         android.app.StatusBarManager sb = getContext().getSystemService(android.app.StatusBarManager.class);
-        sb.requestAddTileService(new android.content.ComponentName(getContext(), TileRicevi.class), "Invia e ricevi",
+        pairwood.sdk.LinguaPairWood.carica(getContext());
+        sb.requestAddTileService(new android.content.ComponentName(getContext(), TileRicevi.class), pairwood.sdk.LinguaPairWood.inglese() ? "Send and receive" : "Invia e ricevi",
             android.graphics.drawable.Icon.createWithResource(getContext(), R.drawable.ic_tile_ricevi), getContext().getMainExecutor(), codice -> {
                 String esito = codice == android.app.StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED ? "aggiunto"
                     : codice == android.app.StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED ? "gia" : "no";
